@@ -1,0 +1,150 @@
+<style>
+  /* CSS GOES HERE */
+  body {
+    background: radial-gradient(circle, #2b0303 0%, #000000 100%);
+    color: #ff4d6d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Georgia', serif;
+  }
+
+  .luxury-card {
+    width: 320px;
+    background: rgba(20, 0, 0, 0.9);
+    border: 2px solid #d4af37;
+    padding: 30px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(255, 77, 109, 0.4);
+  }
+
+  #status {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #d4af37;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  #dare-display {
+    color: #fff;
+    font-size: 1.6rem;
+    margin: 20px 0;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.3;
+  }
+
+  #timer-area {
+    margin-top: 10px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    padding-top: 15px;
+  }
+
+  #timer-clock {
+    font-size: 3rem;
+    color: #d4af37;
+    font-family: monospace;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    padding: 15px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    text-transform: uppercase;
+  }
+
+  .spin-btn {
+    margin-top: 30px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    box-shadow: 0 0 20px #ff4d6d;
+  }
+
+  .timer-btn {
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    font-size: 0.9rem;
+  }
+
+  .spin-btn:active { transform: scale(0.95); }
+</style>
+
+<div class="luxury-card">
+  <div id="status">Ready to Begin</div>
+  <div id="dare-display">The Vault is Locked</div>
+  
+  <div id="timer-area" style="display:none">
+    <div id="timer-clock">01:00</div>
+    <button class="btn timer-btn" id="start-btn" onclick="startClock()">Start Timer</button>
+  </div>
+</div>
+
+<button class="btn spin-btn" onclick="runGame()">Spin the Fate</button>
+
+<script>
+  // JS GOES HERE
+  const verbs = ["Slowly lick", "Gently nibble", "Softly massage", "Passionately kiss", "Trace with ice on", "Sensually caress", "Whisper to"];
+  const areas = ["the neck", "the inner thigh", "the ears", "the lower back", "the collarbone", "the spine", "the palm"];
+
+  let pool = [];
+  function buildPool() {
+    for (let i = 0; i < 200; i++) {
+      let v = verbs[Math.floor(Math.random() * verbs.length)];
+      let a = areas[Math.floor(Math.random() * areas.length)];
+      // 50% chance for a timed dare
+      let timed = Math.random() > 0.5;
+      pool.push(timed ? v + " " + a + " for 60 seconds" : v + " " + a);
+    }
+  }
+  buildPool();
+
+  let interval;
+
+  function runGame() {
+    // Reset Everything
+    clearInterval(interval);
+    document.getElementById('timer-area').style.display = "none";
+    document.getElementById('start-btn').style.display = "inline-block";
+    document.getElementById('timer-clock').innerText = "01:00";
+    
+    document.getElementById('dare-display').innerText = "Selecting...";
+    document.getElementById('status').innerText = "Shuffling the Deck";
+
+    setTimeout(() => {
+      const result = pool.pop();
+      document.getElementById('dare-display').innerText = result;
+      document.getElementById('status').innerText = "Dare Active";
+
+      if (result.includes("seconds")) {
+        document.getElementById('timer-area').style.display = "block";
+      }
+    }, 700);
+  }
+
+  function startClock() {
+    let time = 60;
+    document.getElementById('start-btn').style.display = "none";
+    interval = setInterval(() => {
+      time--;
+      let s = time < 10 ? "0" + time : time;
+      document.getElementById('timer-clock').innerText = "00:" + s;
+      if (time <= 0) {
+        clearInterval(interval);
+        document.getElementById('status').innerText = "Time Up!";
+      }
+    }, 1000);
+  }
+</script>
