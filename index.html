@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Valentine's Dare Night 💕🔥</title>
+  <title>Valentine's Position Dare Night 💕🔥</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,7 +28,7 @@
     }
     #dare-text {
       font-size: 1.4em;
-      min-height: 140px;
+      min-height: 160px;
       margin: 30px 0;
       padding: 20px;
       background: rgba(255,255,255,0.08);
@@ -60,14 +60,14 @@
 <body>
 
 <div class="container">
-  <h1>Valentine's Sexy Dare Night 💋</h1>
-  <p>Explore with love, consent & curiosity — better visuals for positions!</p>
+  <h1>Valentine's Position Dare Night 💋</h1>
+  <p>Random positions to explore bodies, new angles & house spots — with visuals!</p>
   
-  <button onclick="drawDare()">Draw a Random Dare 🔥</button>
+  <button onclick="drawDare()">Draw a Random Position Dare 🔥</button>
   
-  <div id="dare-text">Click "Draw a Random Dare" to begin your sensual adventure…</div>
+  <div id="dare-text">Click to draw a steamy position challenge…</div>
   
-  <button id="visual-btn" onclick="showVisual()">View Position Illustration 📖</button>
+  <button id="visual-btn" onclick="showVisual()">View Clean Illustration 📖</button>
   
   <div id="timer">—</div>
   
@@ -78,31 +78,203 @@
   </div>
   
   <div class="note">
-    Always use your safe word if needed.<br>
-    Everything is optional—check in often & have fun! ❤️<br>
-    Happy Valentine's Day!
+    Consent & safe words first! Check in, laugh, adjust. ❤️<br>
+    Happy Valentine's Day exploration!
   </div>
 </div>
 
 <script>
   const dares = [
-    // ... (keeping most from before, adding/updating a few for demo)
-    "Try **missionary position** with legs over shoulders—hold for at least 3 minutes.",
-    "Do **doggy style** in front of a mirror so you can both watch.",
-    "Try **cowgirl position** and let your partner control the pace completely.",
-    "Try **reverse cowgirl** while watching in a mirror.",
-    "Do **69 position** and try to make each other moan the loudest.",
-    "Try **lotus position** (sitting face-to-face) and maintain eye contact.",
-    "Do **prone bone** (flat on stomach) with slow hip movements.",
-    "Try the **butterfly position** (partner on edge of bed, legs up).",
-    "Try **spooning position** on the couch with slow deep thrusts.",
-    "Have sex in **standing doggy** against the kitchen counter.",
-    "Try **face-sitting** (queening) for oral control.",
-    "Experiment with **coital alignment technique (CAT)** — rocking for clit contact.",
-    "Do **flat iron** (prone with hips slightly raised).",
-    "Try **seated cowgirl** on a chair or laundry machine.",
-    // Add your full list here as before...
-    "Pick any previous dare and do it twice as long."
+    "Try **Missionary** with legs over shoulders against the bedroom wall for deep connection (hold 3 min).",
+    "Do **Doggy Style** in front of a full-length mirror in the hallway to watch each other.",
+    "Ride in **Cowgirl** on the living room couch, controlling the pace and depth.",
+    "Switch to **Reverse Cowgirl** on the dining chair for a teasing view.",
+    "Explore **Lotus** sitting face-to-face on the bed, rocking slowly with eye contact.",
+    "Get into **Spooning** on the bedroom floor blanket for intimate slow thrusts.",
+    "Attempt **Prone Bone** flat on the stomach on fresh sheets, hips slightly raised.",
+    "Try **Butterfly** with receiver on the edge of the kitchen table, legs up.",
+    "Do **Standing Doggy** against the kitchen counter for a quick thrill.",
+    "Experiment with **Face-Sitting (Queening)** on the armchair for oral control.",
+    "Use **Coital Alignment Technique (CAT)** in missionary variation for clit focus.",
+    "Try **Flat Iron** prone with hips raised on pillows in the guest room.",
+    "Ride in **Seated Cowgirl** on the laundry machine (if off) for vibration fun.",
+    "Attempt **Amazon** with receiver squatting over partner lying down.",
+    "Do **Piledriver** carefully on the bed (legs back over head for depth).",
+    "Explore **Seashell** deep missionary with legs folded back high.",
+    "Try **Eagle** legs wide open in missionary on the rug by the TV.",
+    "Get into **Pretzel Dip** side-lying with one leg up for twist.",
+    "Ride **Hot Seat** with one partner sitting, other facing away on a stool.",
+    "Attempt **Viennese Oyster** legs back over head for intense closeness.",
+    "Do **Bridge** arch if flexible, partner entering from above.",
+    "Try **Standing Carry** against the bedroom doorway (hold carefully).",
+    "Explore **Side-by-Side Scissors** for mutual grinding on the couch.",
+    "Attempt **Ballet Dancer** standing with one leg lifted high.",
+    "Do **Corkscrew** sideways twist on the bed for unique angle.",
+    "Try **Anvil** missionary with legs very high on shoulders.",
+    "Ride **Chair Cowgirl** straddling in the office chair.",
+    "Explore **Snow Angel** on back with legs moving wide on the floor.",
+    "Attempt **Deck Chair** reclined variation on pillows.",
+    "Do **X Position** legs crossed for tight squeeze.",
+    "Try **Wheelbarrow** for challenge (short bursts only).",
+    "Get into **Froggy Style** squatting doggy variation.",
+    "Explore **Lazy Dog** relaxed flat doggy on the blanket.",
+    "Attempt **Arch** missionary bridge variation.",
+    "Do **Sideways 69** for comfortable mutual oral twist.",
+    "Ride **Reverse Lotus** facing away in sitting position.",
+    "Try **Standing Split** creative standing with leg support.",
+    "Explore **Full Nelson** (carefully, dominant hold from behind).",
+    "Attempt **Irish Garden** for showy dirty fun.",
+    "Do **See Saw** bouncing variation on the bed.",
+    "Try **Thigh Tide** for clitoral grind focus.",
+    "Get into **Downward Doggy** variation bent over furniture.",
+    "Explore **Magnifying Glass** oral with legs high.",
+    "Attempt **Pushing Tush** rear-entry missionary focus.",
+    "Do **G-Whiz** missionary with one leg on shoulder.",
+    "Ride **Face Off** sitting lap facing each other.",
+    "Try **Pearls Gates** on back with partner kneeling.",
+    "Explore **Stand and Deliver** standing penetration bicycle style.",
+    "Attempt **Modified CAT** rocking up-down in missionary.",
+    "Do **Roll Over** cowgirl to missionary twist.",
+    "Try **Booty Bow Wow** shallow anal focus if desired.",
+    "Get into **69th Street Bridge** oral with chair support.",
+    "Explore **Yawning Position** from Kama Sutra (legs spread wide).",
+    "Attempt **Catherine Wheel** intertwined spinning variation.",
+    "Do **Rocking Horse** seated bouncing on lap.",
+    "Try **Triangle** angled deep entry on edge.",
+    "Ride **Asian Cowgirl** crouched forward variation.",
+    "Explore **Full Missionary** with pinned hands above head.",
+    "Attempt **Against the Wall** standing full body press.",
+    "Do **Bathtub Lotus** seated in dry tub for slip.",
+    "Try **Stairway Doggy** on stairs (careful!).",
+    "Get into **Desk Bent Over** in home office.",
+    "Explore **Window Press** against glass (curtains optional).",
+    "Attempt **Fridge Door** standing quickie lean.",
+    "Do **Pantry Squeeze** tight space standing.",
+    "Try **Closet Passion** in walk-in for intimacy.",
+    "Ride **Armchair Straddle** facing away.",
+    "Explore **Rug Spooning** in front of fireplace.",
+    "Attempt **Guest Room Missionary** on unused bed.",
+    "Do **Hallway Wall Doggy** standing.",
+    "Try **Laundry Room Cowgirl** seated.",
+    "Get into **Kitchen Island Oral** receiver lying back.",
+    "Explore **Balcony Risk** (if private) standing.",
+    "Attempt **Attic Adventure** unusual space missionary.",
+    "Do **Basement Bent Over** doggy variation.",
+    "Try **Yoga Mat Bridge** flexible arch position.",
+    "Ride **Exercise Ball Cowgirl** for bounce (if available).",
+    "Explore **Mirror Reverse Cowgirl** full view.",
+    "Attempt **Eye Contact Lotus** slow rocking.",
+    "Do **Pinned Missionary** hands held down.",
+    "Try **Legs Pinned Butterfly** high legs.",
+    "Get into **Scissoring Grind** thigh ride if appealing.",
+    "Explore **Mutual Masturbation Facing** describe sensations.",
+    "Attempt **Breath Tease Position** no contact yet.",
+    "Do **Edging Cowgirl** slow stop-start.",
+    "Try **Fantasy Stranger Missionary** role-play entry.",
+    "Ride **Lap Dance Reverse** ending in penetration.",
+    "Explore **Hair Pull Spooning** gentle dominant.",
+    "Attempt **Neck Bite Doggy** from behind.",
+    "Do **Whisper Command Lotus** verbal direction.",
+    "Try **Slow Grind Prone** minimal movement.",
+    "Get into **Deep Seashell Hold** legs folded.",
+    "Explore **Wide Eagle Spread** open access.",
+    "Attempt **Twisted Pretzel** leg over shoulder side.",
+    "Do **Hot Seat Bounce** facing away ride.",
+    "Try **Amazon Squat** dominant receiver control.",
+    "Ride **Viennese Fold** intense closeness.",
+    "Explore **Crab Walk** acrobatic challenge.",
+    "Attempt **Standing 69** modified if strong.",
+    "Do **Prostate Angle Prone** external focus if comfortable.",
+    "Try **Ice Tease Missionary** cold sensation.",
+    "Get into **Full Body Slide Cowgirl** lotion slick.",
+    "Explore **Every Room Mini** quick position per room.",
+    "Attempt **Fresh Sheets Lotus** just-changed bed.",
+    "Do **Eye Contact Any** maintain throughout.",
+    "Try **Narration Missionary** describe fantasy.",
+    "Ride **Begging Oral to Position** transition.",
+    "Explore **Poetic Body Worship** then enter.",
+    "Attempt **Command Obey Cowgirl** soft directions.",
+    "Do **Morning Routine Missionary** act out ideal.",
+    "Try **Double Time** any previous twice as long.",
+    "Get into **Coital Rock** focus on alignment.",
+    "Explore **Flat Raise Doggy** hips up pillow.",
+    "Attempt **Carry Wall** supported standing.",
+    "Do **Queening Throne** face sit control.",
+    "Try **Side Oral Twist** comfortable 69.",
+    "Ride **Arch Missionary** bridge entry.",
+    "Explore **Relaxed Lazy** flat doggy slow.",
+    "Attempt **Squat Froggy** deeper doggy.",
+    "Do **See Saw Bounce** playful motion.",
+    "Try **Thigh Clench Tide** grind focus.",
+    "Get into **Downward Bend** furniture doggy.",
+    "Explore **Magnify Oral** legs high support.",
+    "Attempt **Push Rear** entry focus.",
+    "Do **G Spot Whiz** leg shoulder missionary.",
+    "Try **Lap Face Off** intimate sit.",
+    "Ride **Pearly Kneel** partner entry.",
+    "Explore **Bicycle Stand** thrusting view.",
+    "Attempt **Up Down CAT** rocking motion.",
+    "Do **Roll Missionary** cowgirl flip.",
+    "Try **Shallow Bow** anal tease if wanted.",
+    "Get into **Bridge Oral** chair support.",
+    "Explore **Wide Yawn** spread Kama entry.",
+    "Attempt **Wheel Spin** intertwined turn.",
+    "Do **Horse Rock** seated lap bounce.",
+    "Try **Triangle Angle** edge deep.",
+    "Ride **Crouch Asian** forward control.",
+    "Explore **Pinned Full** hands held missionary.",
+    "Attempt **Wall Press** standing body.",
+    "Do **Tub Seated** lotus slip.",
+    "Try **Stair Careful** doggy step.",
+    "Get into **Desk Over** office bend.",
+    "Explore **Window Lean** thrill press.",
+    "Attempt **Fridge Quick** door stand.",
+    "Do **Pantry Tight** space squeeze.",
+    "Try **Closet Close** intimate press.",
+    "Ride **Chair Away** straddle reverse.",
+    "Explore **Rug Front** spoon fireplace.",
+    "Attempt **Guest Unused** missionary bed.",
+    "Do **Hall Stand** wall doggy.",
+    "Try **Laundry Seat** cowgirl machine.",
+    "Get into **Island Lie** oral kitchen.",
+    "Explore **Balcony Private** stand risk.",
+    "Attempt **Attic Unusual** missionary space.",
+    "Do **Basement Bend** doggy vibe.",
+    "Try **Mat Arch** yoga bridge.",
+    "Ride **Ball Bounce** exercise cowgirl.",
+    "Explore **Mirror Full** reverse view.",
+    "Attempt **Eye Lotus** contact rock.",
+    "Do **Pinned Legs** butterfly high.",
+    "Try **Scissor Mutual** grind appeal.",
+    "Get into **Facing Describe** mast position.",
+    "Explore **Tease Breath** no touch yet.",
+    "Attempt **Slow Edge** cowgirl stop.",
+    "Do **Role Missionary** stranger fantasy.",
+    "Try **Lap End** dance to ride.",
+    "Ride **Pull Spoon** gentle hair.",
+    "Explore **Bite Behind** neck doggy.",
+    "Attempt **Command Lotus** verbal guide.",
+    "Do **Minimal Prone** grind slow.",
+    "Try **Fold Deep** seashell hold.",
+    "Get into **Spread Wide** eagle open.",
+    "Explore **Over Twist** pretzel leg.",
+    "Attempt **Away Bounce** hot seat.",
+    "Do **Squat Dom** amazon control.",
+    "Try **Fold Intense** viennese close.",
+    "Ride **Acro Crab** walk challenge.",
+    "Explore **Mod Stand** 69 strong.",
+    "Attempt **Angle External** prone prostate.",
+    "Do **Cold Mission** ice missionary.",
+    "Try **Slick Slide** body cowgirl.",
+    "Get into **Room Quick** mini every.",
+    "Explore **Sheet Lotus** fresh change.",
+    "Attempt **Contact Any** eye throughout.",
+    "Do **Fantasy Narrate** missionary describe.",
+    "Try **Transition Beg** oral to pos.",
+    "Ride **Worship Enter** poetic body.",
+    "Explore **Obey Soft** command cowgirl.",
+    "Attempt **Act Morning** routine mission.",
+    "Do **Previous Double** any twice long."
   ];
 
   let currentTimer = null;
@@ -117,9 +289,9 @@
     
     document.getElementById('dare-text').innerText = currentDareText;
     
-    // Detect position for visual button
-    const posMatch = currentDareText.match(/\*\*(.+?)\*\*|(\b(?:missionary|doggy|cowgirl|reverse|lotus|69|spooning|prone|butterfly|eagle|pretzel|piledriver|seashell|amazon|face-sitting|CAT|flat iron|queening)\b)/i);
-    currentPosition = (posMatch ? (posMatch[1] || posMatch[2]) : "").trim().toLowerCase();
+    // Extract position name for visual search
+    const posMatch = currentDareText.match(/\*\*(.+?)\*\*|(\b(?:missionary|doggy|cowgirl|reverse|lotus|spooning|prone|butterfly|eagle|pretzel|piledriver|seashell|amazon|face-sitting|CAT|flat|queening|bridge|carry|scissors|ballet|corkscrew|anvil|hot seat|viennese|wheelbarrow|froggy|lazy|arch|yawning|catherine|rocking|triangle|asian|full|wall|bathtub|stairway|desk|window|fridge|pantry|closet|armchair|rug|guest|hallway|laundry|island|balcony|attic|basement|yoga|ball|mirror|edging|role|lap|pull|bite|command|minimal|fold|spread|twist|away|squat|fold|acro|mod|angle|cold|slick|room|sheet|contact|fantasy|worship|obey|act)\b)/i);
+    currentPosition = (posMatch ? (posMatch[1] || posMatch[2]) : "").trim().toLowerCase().replace(/\s+/g, ' ');
     
     if (currentPosition) {
       document.getElementById('visual-btn').style.display = 'inline-block';
@@ -127,7 +299,7 @@
       document.getElementById('visual-btn').style.display = 'none';
     }
     
-    const timeMatch = currentDareText.match(/(\d+)\s*(minute|min)/i);
+    const timeMatch = currentDareText.match(/(\d+)\s*(min|minute)/i);
     if (timeMatch) {
       timeLeft = parseInt(timeMatch[1]) * 60;
       document.getElementById('timer').innerText = formatTime(timeLeft);
@@ -145,22 +317,12 @@
   function showVisual() {
     if (!currentPosition) return;
     
-    let url = "";
+    let url = `https://sexinfo101.com/positions?q=${encodeURIComponent(currentPosition)}`; // Primary: 3D HD diagrams
     
-    // Prioritize clean illustration sites
-    if (["missionary", "doggy", "cowgirl", "reverse cowgirl", "lotus", "69", "spooning", "prone bone", "butterfly"].includes(currentPosition)) {
-      // SexInfo101 has good 3D diagrams for many classics
-      url = `https://sexinfo101.com/positions?q=${encodeURIComponent(currentPosition)}`;
-    } else if (currentPosition.includes("kama") || currentPosition.includes("sutra")) {
+    if (currentPosition.includes("kama") || currentPosition.includes("sutra")) {
       url = "https://badgirlsbible.com/kama-sutra";
-    } else {
-      // Fallback to christianfriendly or general safe search
-      url = `https://www.christianfriendlysexpositions.com/?s=${encodeURIComponent(currentPosition)}`;
-    }
-    
-    // If no good match, use a combined safe search
-    if (!url) {
-      url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(currentPosition + " sex position illustration diagram line drawing")}&safe=active`;
+    } else if (["missionary","doggy","cowgirl","lotus","spooning"].includes(currentPosition)) {
+      url = `https://www.christianfriendlysexpositions.com/${currentPosition.replace(/\s+/g, '-')}/`; // Tasteful stick figures
     }
     
     window.open(url, '_blank');
@@ -172,12 +334,48 @@
     return `${min}:${sec < 10 ? '0' : ''}${sec}`;
   }
 
-  // Timer functions remain the same as before...
-  function startTimer() { /* same as previous */ }
-  function pauseTimer() { /* same */ }
-  function resetTimer() { /* same */ }
-  function enableTimerControls() { /* same */ }
-  function disableTimerControls() { /* same */ }
+  function startTimer() {
+    if (timeLeft <= 0 || isRunning) return;
+    isRunning = true;
+    currentTimer = setInterval(() => {
+      timeLeft--;
+      document.getElementById('timer').innerText = formatTime(timeLeft);
+      if (timeLeft <= 0) {
+        clearInterval(currentTimer);
+        isRunning = false;
+        alert("Time's up! Switch or continue? 💦");
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    if (currentTimer) clearInterval(currentTimer);
+    isRunning = false;
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    const timeMatch = currentDareText.match(/(\d+)\s*(min|minute)/i);
+    if (timeMatch) {
+      timeLeft = parseInt(timeMatch[1]) * 60;
+      document.getElementById('timer').innerText = formatTime(timeLeft);
+    } else {
+      timeLeft = 0;
+      document.getElementById('timer').innerText = "—";
+    }
+  }
+
+  function enableTimerControls() {
+    document.getElementById('startBtn').disabled = false;
+    document.getElementById('pauseBtn').disabled = false;
+    document.getElementById('resetBtn').disabled = false;
+  }
+
+  function disableTimerControls() {
+    document.getElementById('startBtn').disabled = true;
+    document.getElementById('pauseBtn').disabled = true;
+    document.getElementById('resetBtn').disabled = true;
+  }
 </script>
 
 </body>
