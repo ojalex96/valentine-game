@@ -1,164 +1,446 @@
-<style>
-  /* CSS GOES HERE */
-  body {
-    background: radial-gradient(circle, #2b0303 0%, #000000 100%);
-    color: #ff4d6d;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Georgia', serif;
-  }
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥 Valentine's Spicy Explorer</title>
+  <style>
+    :root {
+      --bg: #0f001a;
+      --card: #1a0033;
+      --accent: #ff3366;
+      --accent-dark: #cc0044;
+      --text: #f0e6ff;
+      --muted: #b399e6;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1rem;
+      line-height: 1.5;
+    }
+    header {
+      text-align: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #330066;
+    }
+    h1 { margin: 0; color: var(--accent); font-size: 2.2rem; }
+    .safeword-box {
+      background: #220033;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 600px;
+      border-radius: 12px;
+      border: 1px solid var(--accent-dark);
+      text-align: center;
+    }
+    .safeword-box strong { color: #ffcc00; }
+    main { max-width: 900px; margin: 2rem auto; }
+    .phase { display: none; }
+    .phase.active { display: block; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid #330066;
+      transition: all 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card h3 {
+      margin: 0 0 0.6rem;
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.15s;
+    }
+    .yes { background: #00cc66; color: black; }
+    .maybe { background: #ffaa00; color: black; }
+    .no { background: #cc0000; color: white; }
+    .selected { opacity: 0.7; box-shadow: 0 0 0 3px var(--accent); }
+    .big-btn {
+      background: var(--accent);
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      margin: 1rem;
+    }
+    .big-btn:hover { background: var(--accent-dark); }
+    #result-list .card { cursor: default; }
+    #random-result {
+      background: #220033;
+      padding: 1.5rem;
+      border-radius: 16px;
+      margin: 2rem 0;
+      border: 2px dashed var(--accent);
+      text-align: center;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    #random-result h2 { margin: 0 0 1rem; color: var(--accent); }
+    .aftercare {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background: #1a0d26;
+      border-radius: 12px;
+      text-align: center;
+      font-style: italic;
+    }
+    footer { text-align: center; margin: 3rem 0; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
 
-  .luxury-card {
-    width: 320px;
-    background: rgba(20, 0, 0, 0.9);
-    border: 2px solid #d4af37;
-    padding: 30px;
-    text-align: center;
-    border-radius: 20px;
-    box-shadow: 0 0 40px rgba(255, 77, 109, 0.4);
-  }
+<header>
+  <h1>🔥 Valentine's Spicy Explorer</h1>
+  <p style="margin:0.8rem 0;color:var(--muted);">Private. Intense. Yours only.</p>
+</header>
 
-  #status {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    color: #d4af37;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  #dare-display {
-    color: #fff;
-    font-size: 1.6rem;
-    margin: 20px 0;
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.3;
-  }
-
-  #timer-area {
-    margin-top: 10px;
-    border-top: 1px solid rgba(212, 175, 55, 0.3);
-    padding-top: 15px;
-  }
-
-  #timer-clock {
-    font-size: 3rem;
-    color: #d4af37;
-    font-family: monospace;
-    margin-bottom: 10px;
-  }
-
-  .btn {
-    padding: 15px 40px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-    text-transform: uppercase;
-  }
-
-  .spin-btn {
-    margin-top: 30px;
-    background: #ff4d6d;
-    color: white;
-    border: none;
-    font-size: 1.2rem;
-    box-shadow: 0 0 20px #ff4d6d;
-  }
-
-  .timer-btn {
-    background: transparent;
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    font-size: 0.9rem;
-  }
-
-  .spin-btn:active { transform: scale(0.95); }
-</style>
-
-<div class="luxury-card">
-  <div id="status">Ready to Begin</div>
-  <div id="dare-display">The Vault is Locked</div>
-  
-  <div id="timer-area" style="display:none">
-    <div id="timer-clock">01:00</div>
-    <button class="btn timer-btn" id="start-btn" onclick="startClock()">Start Timer</button>
-  </div>
+<div class="safeword-box">
+  <strong>Safe-word:</strong> Decide together now → <input type="text" id="safeword" placeholder="e.g. RED" style="padding:0.4rem;border-radius:6px;border:none;background:#330066;color:white;text-align:center;">
+  <div style="margin-top:0.6rem;font-size:0.9rem;">Always visible. Use it = everything stops instantly.</div>
 </div>
 
-<button class="btn spin-btn" onclick="runGame()">Spin the Fate</button>
+<main>
+
+  <!-- Phase 1: Instructions & Start -->
+  <div id="intro" class="phase active">
+    <h2>Welcome to your private night of discovery</h2>
+    <p>1. Both fill this out separately (use incognito or different devices if needed)<br>2. Mark each act → <strong>Yes</strong> (want to), <strong>Maybe</strong> (open to discuss/try), <strong>No</strong> (hard limit)<br>3. Click "Compare Our Desires" when both are done</p>
+    <button class="big-btn" onclick="startSurvey()">Begin the List</button>
+  </div>
+
+  <!-- Phase 2: Survey -->
+  <div id="survey" class="phase">
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <button class="big-btn" onclick="saveAndCompare()" style="background:#9933ff;">Save & Compare Our Desires</button>
+      <button class="big-btn" onclick="resetLocal()" style="background:#555;">Reset My Choices</button>
+    </div>
+
+    <div class="grid" id="card-grid"></div>
+  </div>
+
+  <!-- Phase 3: Results -->
+  <div id="results" class="phase">
+    <h2>🔥 Mutual Yes + Maybe 🔥</h2>
+    <p id="match-count" style="text-align:center;color:var(--muted);"></p>
+
+    <div class="grid" id="result-list"></div>
+
+    <div style="text-align:center;margin:2rem 0;">
+      <button class="big-btn" onclick="pickRandom()">Surprise Me! 🎲</button>
+      <button class="big-btn" onclick="showSurvey()" style="background:#555;">Back to List</button>
+    </div>
+
+    <div id="random-result">
+      <h2>Waiting for your spark...</h2>
+      <p>Click "Surprise Me!" to pull a random shared desire.</p>
+    </div>
+
+    <div class="aftercare">
+      <h3>Aftercare Reminder</h3>
+      <p>After intense play: cuddle, hydrate, talk softly, check in emotionally & physically.<br>Reassure. Snack. Sleep. Repeat as needed. ❤️</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Made with lust & consent • Everything stays on your device
+</footer>
 
 <script>
-  const sensoryActs = [
-    { 
-        verb: "Trace your tongue slowly along", 
-        areas: ["the dip of the collarbone", "the sensitive inner thigh", "the curve of the hip", "the line of the spine"],
-        timed: true 
-    },
-    { 
-        verb: "Apply firm, warm-oil pressure to", 
-        areas: ["the lower back", "the arches of the feet", "the back of the neck"],
-        timed: true 
-    },
-    { 
-        verb: "Exhale warm breath and soft nibbles against", 
-        areas: ["the earlobe", "the side of the neck", "the shoulder"],
-        timed: false 
-    },
-    { 
-        verb: "Lightly trail your fingernails (or a feather) over", 
-        areas: ["the stomach", "the inner forearms", "the backs of the knees"],
-        timed: true 
-    },
-    { 
-        verb: "Blindfold your partner and explore", 
-        areas: ["their chest with your lips", "their palms with your tongue"],
-        timed: true 
-    },
-    { 
-        verb: "Whisper your most forbidden desire while kissing", 
-        areas: ["their neck", "their jawline"],
-        timed: false 
-    }
+// ────────────────────────────────────────────────
+const activities = [
+  { id:1, text:"Slow, teasing full-body massage with oil", cat:"sensual" },
+  { id:2, text:"Extended kissing & making out session (30+ min)", cat:"sensual" },
+  { id:3, text:"Blindfolding one partner", cat:"sensory" },
+  { id:4, text:"Wearing something sexy chosen by partner", cat:"sensual" },
+  { id:5, text:"Giving/receiving a sensual lap dance", cat:"performance" },
+  { id:6, text:"Mutual masturbation while watching each other", cat:"voyeur" },
+  { id:7, text:"Dirty talk describing fantasies in detail", cat:"verbal" },
+  { id:8, text:"Edging (bringing close to orgasm then stopping)", cat:"control" },
+  { id:9, text:"Ice cubes or cold sensation play on skin", cat:"sensory" },
+  { id:10, text:"Warm candle wax dripping (body-safe low-temp)", cat:"sensory" },
+  { id:11, text:"Light hair pulling during sex", cat:"power" },
+  { id:12, text:"Neck kissing & gentle biting", cat:"sensual" },
+  { id:13, text:"69 position", cat:"oral" },
+  { id:14, text:"Oral sex (receiving)", cat:"oral" },
+  { id:15, text:"Oral sex (giving)", cat:"oral" },
+  { id:16, text:"Fingering / hand stimulation", cat:"manual" },
+  { id:17, text:"Using a vibrator together", cat:"toys" },
+  { id:18, text:"Anal play with fingers (external only)", cat:"anal" },
+  { id:19, text:"Anal penetration (small toy or finger)", cat:"anal" },
+  { id:20, text:"Vaginal intercourse in missionary", cat:"penetrative" },
+  { id:21, text:"Doggy style position", cat:"penetrative" },
+  { id:22, text:"Spooning sex", cat:"penetrative" },
+  { id:23, text:"Cowgirl / partner on top", cat:"penetrative" },
+  { id:24, text:"Reverse cowgirl", cat:"penetrative" },
+  { id:25, text:"Standing sex against wall", cat:"penetrative" },
+  { id:26, text:"Shower sex", cat:"location" },
+  { id:27, text:"Sex in a different room of the house", cat:"location" },
+  { id:28, text:"Outdoor sex (private & safe place)", cat:"risk" },
+  { id:29, text:"Role-play: strangers meeting", cat:"roleplay" },
+  { id:30, text:"Role-play: boss & employee", cat:"roleplay" },
+  { id:31, text:"Role-play: teacher & student", cat:"roleplay" },
+  { id:32, text:"Light spanking (over clothes)", cat:"impact" },
+  { id:33, text:"Spanking with hand (bare)", cat:"impact" },
+  { id:34, text:"Being pinned down / held firmly", cat:"power" },
+  { id:35, text:"Giving light commands / orders", cat:"dom" },
+  { id:36, text:"Following light commands / orders", cat:"sub" },
+  { id:37, text:"Praise kink (lots of compliments during)", cat:"verbal" },
+  { id:38, text:"Degradation / humiliation (mild verbal)", cat:"power" },
+  { id:39, text:"Choking / light breath play (very careful)", cat:"edge" },
+  { id:40, text:"Using restraints (soft cuffs)", cat:"bondage" },
+  { id:41, text:"Tying with silk scarf or tie", cat:"bondage" },
+  { id:42, text:"Full rope bondage (if experienced)", cat:"bondage" },
+  { id:43, text:"Orgasm control / denial for short time", cat:"control" },
+  { id:44, text:"Temperature play (hot/cold alternating)", cat:"sensory" },
+  { id:45, text:"Food play (chocolate, whipped cream etc.)", cat:"sensory" },
+  { id:46, text:"Watching ethical porn together", cat:"voyeur" },
+  { id:47, text:"Recording audio of moans / dirty talk (private)", cat:"audio" },
+  { id:48, text:"Sexting each other during the day", cat:"tease" },
+  { id:49, text:"Sending nudes / teasing photos", cat:"tease" },
+  { id:50, text:"Striptease performance", cat:"performance" },
+  // Continuing to 165+ — condensed for space but varied
+  { id:51, text:"Facesitting (receiving)", cat:"oral/power" },
+  { id:52, text:"Foot worship / massage", cat:"fetish" },
+  { id:53, text:"Nipple clamps (adjustable)", cat:"sensation" },
+  { id:54, text:"Clothespins on skin", cat:"sensation" },
+  { id:55, text:"Butt plug wear during day", cat:"anal/prep" },
+  { id:56, text:"Strap-on play (giving)", cat:"pegging" },
+  { id:57, text:"Strap-on play (receiving)", cat:"pegging" },
+  { id:58, text:"Prostate stimulation", cat:"anal" },
+  { id:59, text:"G-spot focused play", cat:"manual" },
+  { id:60, text:"Squirting exploration (if possible)", cat:"intense" },
+  { id:61, text:"Multiple orgasms session", cat:"endurance" },
+  { id:62, text:"Tantric slow sex (no rush)", cat:"sensual" },
+  { id:63, text:"Quickie somewhere risky", cat:"risk" },
+  { id:64, text:"Morning sex right after waking", cat:"spontaneous" },
+  { id:65, text:"Sex right before sleep", cat:"intimate" },
+  { id:66, text:"Mirror sex (watching ourselves)", cat:"voyeur" },
+  { id:67, text:"Role reversal (switching dom/sub)", cat:"power" },
+  { id:68, text:"Pet play (light collars, names)", cat:"roleplay" },
+  { id:69, text:"Impact play with paddle", cat:"impact" },
+  { id:70, text:"Flogging (soft)", cat:"impact" },
+  { id:71, text:"Sensory deprivation (earplugs + blindfold)", cat:"sensory" },
+  { id:72, text:"Public teasing under clothes", cat:"risk" },
+  { id:73, text:"Exhibitionism (private but visible risk)", cat:"risk" },
+  { id:74, text:"Voyeurism (watching partner touch self)", cat:"voyeur" },
+  { id:75, text:"Cuckquean fantasy talk", cat:"fantasy" },
+  { id:76, text:"Cuckold fantasy talk", cat:"fantasy" },
+  { id:77, text:"Threesome fantasy discussion", cat:"fantasy" },
+  { id:78, text:"Group sex fantasy talk", cat:"fantasy" },
+  { id:79, text:"Using sex dice / cards game", cat:"game" },
+  { id:80, text:"Erotic storytelling together", cat:"verbal" },
+  { id:81, text:"Writing & reading erotic letters", cat:"tease" },
+  { id:82, text:"Phone sex while apart", cat:"audio" },
+  { id:83, text:"Video call masturbation", cat:"voyeur" },
+  { id:84, text:"Wearing partner's clothes during sex", cat:"role" },
+  { id:85, text:"Cross-dressing play", cat:"role" },
+  { id:86, text:"Lingerie shopping together", cat:"prep" },
+  { id:87, text:"Sex toy shopping online together", cat:"prep" },
+  { id:88, text:"Using cock ring", cat:"toys" },
+  { id:89, text:"Using vibrating panties", cat:"toys" },
+  { id:90, text:"Remote-controlled toy in public", cat:"risk" },
+  { id:91, text:"Breath play with hand on throat (very light)", cat:"edge" },
+  { id:92, text:"Knife play (dull edge, no cutting)", cat:"edge" },
+  { id:93, text:"Blood play fantasy talk only", cat:"fantasy" },
+  { id:94, text:"Age play (consensual adult)", cat:"roleplay" },
+  { id:95, text:"Medical play fantasy", cat:"roleplay" },
+  { id:96, text:"Kidnapping fantasy role-play", cat:"roleplay" },
+  { id:97, text:"Consensual non-consent scene (CNC)", cat:"edge" },
+  { id:98, text:"Impact on thighs / buttocks", cat:"impact" },
+  { id:99, text:"Tickling as foreplay", cat:"sensory" },
+  { id:100, text:"Wrestling / playful struggle", cat:"power" },
+  { id:101, text:"Slapping face (very light)", cat:"impact" },
+  { id:102, text:"Spitting (consensual)", cat:"power" },
+  { id:103, text:"Golden shower fantasy talk", cat:"edge" },
+  { id:104, text:"Watersports play", cat:"edge" },
+  { id:105, text:"Period sex", cat:"intimate" },
+  { id:106, text:"Post-sex cuddling mandatory", cat:"aftercare" },
+  { id:107, text:"Aftercare massage", cat:"aftercare" },
+  { id:108, text:"Sharing what felt best after", cat:"aftercare" },
+  { id:109, text:"Trying a new position from list", cat:"exploration" },
+  { id:110, text:"Sex marathon (multiple rounds)", cat:"endurance" },
+  // ... add more if you want, up to 165+
+  { id:111, text:"Sensual bathing together", cat:"sensual" },
+  { id:112, text:"Body painting / drawing on skin", cat:"sensory" },
+  { id:113, text:"Erotic reading aloud", cat:"verbal" },
+  { id:114, text:"Using feathers / soft brushes", cat:"sensory" },
+  { id:115, text:"Blind taste test with body", cat:"sensory" },
+  { id:116, text:"Slow undressing ritual", cat:"tease" },
+  { id:117, text:"Orgasm on command training", cat:"control" },
+  { id:118, text:"Begging allowed / encouraged", cat:"power" },
+  { id:119, text:"Collar & leash play (symbolic)", cat:"power" },
+  { id:120, text:"Service submission (acts of service)", cat:"power" },
+  { id:121, text:"Brat play / defiance dynamic", cat:"power" },
+  { id:122, text:"Punishment / reward system", cat:"power" },
+  { id:123, text:"Sensory overload (multiple stim)", cat:"sensory" },
+  { id:124, text:"Quiet sex (must be silent)", cat:"control" },
+  { id:125, text:"Loud / vocal encouraged", cat:"verbal" },
+  { id:126, text:"Sex while high/drunk (if safe)", cat:"altered" },
+  { id:127, text:"Role-play: royalty & servant", cat:"roleplay" },
+  { id:128, text:"Role-play: vampire & prey", cat:"roleplay" },
+  { id:129, text:"Fantasy creature play", cat:"roleplay" },
+  { id:130, text:"Using mirrors on ceiling/floor", cat:"voyeur" },
+  { id:131, text:"Sex in car (private)", cat:"location" },
+  { id:132, text:"Hotel room adventure", cat:"location" },
+  { id:133, text:"Camping / nature sex", cat:"location" },
+  { id:134, text:"Kitchen counter sex", cat:"location" },
+  { id:135, text:"Table / desk sex", cat:"location" },
+  { id:136, text:"Floor sex with blankets", cat:"location" },
+  { id:137, text:"Bathtub sex", cat:"location" },
+  { id:138, text:"Balcony sex (private)", cat:"risk" },
+  { id:139, text:"Window pressing exhibition", cat:"risk" },
+  { id:140, text:"Sex while music / playlist sync", cat:"mood" },
+  { id:141, text:"Candlelit only lighting", cat:"mood" },
+  { id:142, text:"Red lighting setup", cat:"mood" },
+  { id:143, text:"Costume sex (simple)", cat:"role" },
+  { id:144, text:"Latex / leather clothing", cat:"fetish" },
+  { id:145, text:"High heels during sex", cat:"fetish" },
+  { id:146, text:"Stockings / garters worship", cat:"fetish" },
+  { id:147, text:"Corset wearing", cat:"fetish" },
+  { id:148, text:"Chastity fantasy talk", cat:"control" },
+  { id:149, text:"Tease & denial all day", cat:"tease" },
+  { id:150, text:"Overnight bondage (light)", cat:"bondage" },
+  { id:151, text:"Sleepy morning oral", cat:"spontaneous" },
+  { id:152, text:"Surprise wake-up sex", cat:"spontaneous" },
+  { id:153, text:"Sex after argument (make-up)", cat:"emotional" },
+  { id:154, text:"Sex as reward", cat:"power" },
+  { id:155, text:"Competitive edging challenge", cat:"game" },
+  { id:156, text:"Who comes first loses game", cat:"game" },
+  { id:157, text:"Strip poker / game night", cat:"game" },
+  { id:158, text:"Truth or dare sexy edition", cat:"game" },
+  { id:159, text:"Fantasy sharing circle", cat:"verbal" },
+  { id:160, text:"Body worship session", cat:"sensual" },
+  { id:161, text:"Mutual grooming / shaving", cat:"intimate" },
+  { id:162, text:"Post-sex photography (private)", cat:"voyeur" },
+  { id:163, text:"Erotic journaling together", cat:"intimate" },
+  { id:164, text:"Planning next scene together", cat:"intimate" },
+  { id:165, text:"Aftercare checklist review", cat:"aftercare" }
 ];
 
-// Special "Wildcard" dares for deeper exploration
-const wildcards = [
-    "Maintain deep eye contact for 60 seconds without speaking or touching.",
-    "Describe exactly how you want to be touched right now.",
-    "Switch roles: One becomes the 'Director' and the other the 'Performer' for 5 minutes.",
-    "Remove one piece of your partner's clothing... as slowly as humanly possible."
-];
+let myChoices = JSON.parse(localStorage.getItem('myChoices')) || {};
 
-let pool = [];
-
-function buildPool() {
-    // 1. Add specific high-end dares
-    pool = [...wildcards];
-
-    // 2. Generate the rest using smart pairing
-    while (pool.length < 200) {
-        const set = sensoryActs[Math.floor(Math.random() * sensoryActs.length)];
-        const area = set.areas[Math.floor(Math.random() * set.areas.length)];
-        
-        // Add time only if the action benefits from a slow burn
-        const dare = set.timed ? `${set.verb} ${area} for 60 seconds` : `${set.verb} ${area}`;
-        
-        if (!pool.includes(dare)) {
-            pool.push(dare);
-        }
-    }
-    // Shuffle the final deck
-    pool.sort(() => Math.random() - 0.5);
+// ────────────────────────────────────────────────
+function renderCards(containerId, editable = true) {
+  const grid = document.getElementById(containerId);
+  grid.innerHTML = '';
+  activities.forEach(act => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <h3>${act.text}</h3>
+      ${editable ? `
+      <div class="buttons">
+        <button class="yes ${myChoices[act.id]==='yes'?'selected':''}" onclick="setChoice(${act.id},'yes')">Yes</button>
+        <button class="maybe ${myChoices[act.id]==='maybe'?'selected':''}" onclick="setChoice(${act.id},'maybe')">Maybe</button>
+        <button class="no ${myChoices[act.id]==='no'?'selected':''}" onclick="setChoice(${act.id},'no')">No</button>
+      </div>` : ''}
+    `;
+    grid.appendChild(card);
+  });
 }
 
-buildPool();
+function setChoice(id, val) {
+  myChoices[id] = val;
+  localStorage.setItem('myChoices', JSON.stringify(myChoices));
+  renderCards('card-grid'); // refresh
+}
 
-// ... (Rest of the timer and display functions remain the same)
+function saveAndCompare() {
+  // In real multi-user → you'd send your choices to partner somehow
+  // Here we assume partner also saved locally on same device or you compare manually
+  alert("If partner also filled on this device/browser → we can compare.\nOtherwise copy your choices or use same localStorage.");
+  showResults();
+}
+
+function showResults() {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.getElementById('results').classList.add('active');
+
+  const partnerChoices = myChoices; // placeholder — in real app you'd load partner's
+  const mutual = activities.filter(a => 
+    myChoices[a.id] && partnerChoices[a.id] &&
+    (myChoices[a.id] !== 'no' && partnerChoices[a.id] !== 'no')
+  );
+
+  document.getElementById('match-count').textContent = `${mutual.length} shared Yes / Maybe acts 🔥`;
+
+  const resGrid = document.getElementById('result-list');
+  resGrid.innerHTML = '';
+  mutual.forEach(act => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<h3>${act.text}</h3>`;
+    resGrid.appendChild(card);
+  });
+}
+
+function pickRandom() {
+  const mutual = activities.filter(a => 
+    myChoices[a.id] && myChoices[a.id] !== 'no'  // simplistic — assumes single user for demo
+  );
+  if (mutual.length === 0) {
+    document.getElementById('random-result').innerHTML = '<h2>No matches yet...</h2><p>Fill more Yes/Maybe first!</p>';
+    return;
+  }
+  const rand = mutual[Math.floor(Math.random() * mutual.length)];
+  document.getElementById('random-result').innerHTML = `
+    <h2>${rand.text}</h2>
+    <p>Enjoy... and remember your safe-word!</p>
+  `;
+}
+
+function startSurvey() {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.getElementById('survey').classList.add('active');
+  renderCards('card-grid', true);
+}
+
+function showSurvey() {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.getElementById('survey').classList.add('active');
+}
+
+function resetLocal() {
+  if (confirm("Reset ALL your choices?")) {
+    localStorage.removeItem('myChoices');
+    myChoices = {};
+    renderCards('card-grid');
+  }
+}
+
+// Init
+if (Object.keys(myChoices).length > 0) {
+  document.getElementById('intro').innerHTML += '<p style="color:#ffaa00;">You have previous choices loaded.</p>';
+}
 </script>
+
+</body>
+</html>
