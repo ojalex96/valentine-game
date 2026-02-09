@@ -1,153 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔥 Body Discovery — Unexpected Zones</title>
-  <style>
-    :root {
-      --bg: #0a0012;
-      --card: #1c0038;
-      --accent: #ff1a66;
-      --text: #e6d9ff;
-      --muted: #a68ad9;
-    }
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      text-align: center;
-    }
-    h1 { color: var(--accent); font-size: 2.8rem; margin: 0.5rem 0; }
-    .safeword { 
-      background: #220033; 
-      padding: 1rem 2rem; 
-      border-radius: 12px; 
-      margin: 1.5rem 0; 
-      border: 1px solid var(--accent); 
-      max-width: 600px;
-    }
-    .safeword strong { color: #ffcc00; }
-    #reveal {
-      background: var(--card);
-      padding: 2rem;
-      border-radius: 16px;
-      border: 2px dashed var(--accent);
-      max-width: 700px;
-      min-height: 180px;
-      margin: 1.5rem 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 0 0 30px rgba(255,51,102,0.2);
-    }
-    #act { font-size: 1.4rem; line-height: 1.6; margin: 1rem 0; }
-    button {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 1.2rem 3rem;
-      font-size: 1.5rem;
-      border-radius: 50px;
-      cursor: pointer;
-      margin: 1.5rem;
-      transition: all 0.2s;
-    }
-    button:hover { background: #cc004d; transform: scale(1.05); }
-    .aftercare {
-      margin-top: 3rem;
-      padding: 1.5rem;
-      background: #140022;
-      border-radius: 12px;
-      max-width: 600px;
-      font-style: italic;
-    }
-    footer { margin-top: auto; padding: 2rem 0; color: var(--muted); font-size: 0.9rem; }
-  </style>
-</head>
-<body>
+import random
 
-  <h1>🔥 Body Discovery</h1>
-  <p style="font-size:1.2rem; color:var(--muted);">Random surprises — hidden sensitive spots on the body to explore slowly together. No toys, just touch, breath, lips, and curiosity.</p>
+# List of random sexual acts for exploration. These focus on body parts, positions, fantasies, and locations in the house.
+# No sex toys included. All acts are consensual and for adults.
+acts = [
+    "Sensually kiss and lick your partner's neck while whispering compliments.",
+    "Explore your partner's earlobes with gentle nibbles and breaths.",
+    "Massage and kiss the inner thighs, building anticipation slowly.",
+    "Try the missionary position with deep eye contact and slow thrusts.",
+    "Engage in doggy style position, focusing on rhythmic movements.",
+    "Have your partner on top in cowgirl position, letting them control the pace.",
+    "Spoon together in the spooning position for intimate, close contact.",
+    "Attempt standing sex against a wall for an adventurous feel.",
+    "Roleplay as strangers meeting for the first time in a bar scenario.",
+    "Pretend to be a doctor and patient examining each other intimately.",
+    "Act out a teacher and student fantasy with playful instructions.",
+    "Roleplay boss and employee in a power dynamic scene.",
+    "Have sex in the kitchen, using the counter for support.",
+    "Move to the living room couch for a cozy, spontaneous session.",
+    "Try intimacy in the shower, with water adding to the sensations.",
+    "Explore on the dining table for a change of scenery.",
+    "Focus on nipple play: licking, sucking, and gentle pinching.",
+    "Kiss and caress the back and spine for relaxing arousal.",
+    "Tease the buttocks with massages and light spanks.",
+    "Explore oral pleasure on genitals, taking turns slowly.",
+    "Use hands to stimulate each other's erogenous zones simultaneously.",
+    "Try 69 position for mutual oral exploration.",
+    "Incorporate light biting on shoulders and arms.",
+    "Focus on foot massages leading to toe sucking if desired.",
+    "Roleplay historical figures in a romantic encounter.",
+    "Pretend to be celebrities in a secret affair fantasy.",
+    "Have sex in the hallway for a quick, exciting thrill.",
+    "Move to the bathroom sink area for mirrored views.",
+    "Experiment with reverse cowgirl position for a new angle.",
+    "Try lotus position sitting face-to-face for deep connection.",
+    "Incorporate fantasy of being watched (imaginary) to heighten excitement.",
+    "Roleplay as adventurers discovering each other's 'treasures'."
+]
 
-  <div class="safeword">
-    <strong>Safe-word:</strong> Agree now — say it and everything stops instantly.  
-    <input type="text" placeholder="e.g. RED" style="margin-left:0.8rem; padding:0.5rem; background:#330066; border:none; color:white; border-radius:6px; text-align:center;">
-  </div>
+def main():
+    print("Welcome to your Valentine's Day Sexual Exploration Game!")
+    print("This game generates random acts for you and your partner to try.")
+    print("Press Enter to get a new act, or type 'quit' to exit.\n")
+    
+    while True:
+        user_input = input("Press Enter for a random act (or 'quit' to exit): ").strip().lower()
+        if user_input == 'quit':
+            print("Thanks for playing! Have a wonderful Valentine's Day!")
+            break
+        random_act = random.choice(acts)
+        print(f"Random Act: {random_act}\n")
 
-  <div id="reveal">
-    <p style="color:var(--muted); margin:0;">Tap to reveal an unexpected zone to tease...</p>
-    <div id="act"></div>
-  </div>
-
-  <button onclick="getRandomAct()">Reveal Next Body Surprise 🔥</button>
-
-  <div class="aftercare">
-    <strong>After intense moments:</strong> Cuddle close, hydrate, share what felt electric or surprising. Check in softly. Warmth, reassurance, snacks. ❤️
-  </div>
-
-  <footer>Private. Body-focused. Pure exploration.</footer>
-
-  <script>
-    const acts = [
-      "Scalp massage with slow fingertips circling, then gentle hair tugging to send tingles everywhere",
-      "Trace the inner wrists with feather-light kisses or breath, letting the sensitivity build",
-      "Nape of the neck: soft lips brushing, then light nibbles or warm exhales down the spine",
-      "Behind the ears: whisper dirty compliments while tracing the curve with your tongue",
-      "Inner forearms: slow stroking from elbow to wrist, alternating with soft kisses",
-      "Lower belly just above the pubic line: circle with fingertips, then warm tongue swirls",
-      "Small of the back (sacrum): firm palms pressing, or light scratching upward",
-      "Inner elbows: gentle licking or blowing cool air after warming with your mouth",
-      "Behind the knees: soft kisses and tongue tracing while partner lies face down",
-      "Soles of the feet: slow thumb pressure along the arch, then light tickles turning sensual",
-      "Toes: suck gently one by one, or massage between them with oiled fingers",
-      "Collarbone: trace with lips and tongue, dipping into the hollows",
-      "Armpits (if comfortable): light fingertips or kisses on freshly clean skin for surprising shivers",
-      "Lower back dimples: press thumbs in circles, then drag nails lightly across",
-      "Inner thighs close to (but not on) genitals: teasing strokes getting closer then retreating",
-      "Navel: tongue circling inside, then blowing cool air or dripping warm breath",
-      "Back of the neck down to shoulders: massage turning into slow kisses",
-      "Fingertips and palms: suck fingers slowly or trace palms with your tongue",
-      "Earlobes: gentle sucking, nibbling, or breathing warm air inside the ear",
-      "Hollow of the throat: light kisses and tongue flicks while feeling the pulse",
-      "Side of the ribs: fingertips grazing lightly like a feather, building goosebumps",
-      "Ankles and Achilles tendon: soft strokes upward, then light kisses",
-      "Shoulder blades: trace circles with nails, then press firmly with palms",
-      "Upper inner arm near armpit: slow licking or soft biting",
-      "Perineum area (between genitals and anus, external only): light pressing or circling with fingers",
-      "Temples and forehead: slow massage turning into soft kisses",
-      "Jawline: trace with fingertips, then follow with open-mouth kisses",
-      "Base of the skull: firm thumbs pressing while kissing the neck",
-      "Side of the hip bone: light scratching or tongue along the ridge",
-      "Calf muscles: deep massage turning sensual with slow licks upward",
-      "Palm of the hand: kiss the center, then trace each finger slowly",
-      "Back of the thigh: light nails dragging from knee upward",
-      "Under the chin: soft kisses and gentle bites",
-      "Space between the shoulder blades: warm breath followed by slow tongue lines",
-      "Outer hip curve: firm gripping turning into light spanking taps",
-      "Inside of the upper arm: feather touches escalating to kisses",
-      "Lower rib cage sides: fingertips circling, then tongue tracing",
-      "Crown of the head: slow scalp scratches that make the whole body tingle",
-      "Around the areola (if nipples are sensitive): circle without touching the center to build anticipation",
-      "The dip above the tailbone: press and circle with thumbs while kissing lower back"
-    ];
-
-    function getRandomAct() {
-      const randomIndex = Math.floor(Math.random() * acts.length);
-      document.getElementById('act').innerHTML = `<strong>${acts[randomIndex]}</strong>`;
-      document.getElementById('reveal').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Show one surprise right away on load
-    window.onload = getRandomAct;
-  </script>
-
-</body>
-</html>
+if __name__ == "__main__":
+    main()
