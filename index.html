@@ -32,7 +32,7 @@
     }
     #dare-text {
       font-size: 1.4em;
-      min-height: 120px;
+      min-height: 140px;
       margin: 30px 0;
       padding: 20px;
       background: rgba(255,255,255,0.08);
@@ -46,7 +46,7 @@
       padding: 14px 28px;
       font-size: 1.1em;
       border-radius: 50px;
-      margin: 10px;
+      margin: 10px 4px;
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -70,17 +70,26 @@
       color: #ffcccb;
       margin-top: 30px;
     }
+    #visual-btn {
+      background: #ab47bc;
+      display: none;
+    }
+    #visual-btn:hover {
+      background: #7b1fa2;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
   <h1>Valentine's Sexy Dare Night 💋</h1>
-  <p>Explore each other with love, consent & curiosity</p>
+  <p>Explore with love, consent & curiosity — visuals for positions now easier!</p>
   
   <button onclick="drawDare()">Draw a Random Dare 🔥</button>
   
   <div id="dare-text">Click "Draw a Random Dare" to begin your sensual adventure…</div>
+  
+  <button id="visual-btn" onclick="showVisual()">Show Visual Ideas for Position 📸</button>
   
   <div id="timer">—</div>
   
@@ -103,137 +112,137 @@
     "Blindfold your partner and trace their entire body with just your fingertips for 3 minutes.",
     "Kiss and gently bite every inch of your partner's neck and ears (4 minutes).",
     "Perform oral sex on your partner exactly how they describe it verbally right now.",
-    "Try missionary but with legs over shoulders—hold for at least 3 minutes.",
-    "Do doggy style in front of a full-length mirror so you can both watch.",
-    "Have sex standing up against the kitchen counter.",
-    "Move to the living room couch and try spooning position with slow deep thrusts.",
+    "Try **missionary position** but with legs over shoulders—hold for at least 3 minutes. (Google 'missionary legs over shoulders illustration' for visual)",
+    "Do **doggy style** in front of a full-length mirror so you can both watch.",
+    "Have sex standing up against the kitchen counter in a **standing doggy** variation.",
+    "Move to the living room couch and try **spooning position** with slow deep thrusts.",
     "Take turns worshipping each other's chest/breasts with mouth and hands (3 min each).",
     "Lick and kiss down your partner's spine from neck to tailbone very slowly.",
     "Give a sensual foot massage that slowly moves up the legs (4 minutes).",
-    "Try cowgirl position and let your partner control the pace completely.",
+    "Try **cowgirl position** and let your partner control the pace completely.",
     "Have sex in the shower—focus on slippery bodies sliding together.",
     "Blindfold yourself and let your partner guide your mouth wherever they want.",
     "Describe a hot fantasy in detail while slowly grinding on each other (no penetration yet).",
-    "Try reverse cowgirl while watching yourselves in a mirror.",
+    "Try **reverse cowgirl** while watching yourselves in a mirror.",
     "Kiss and tease inner thighs without touching genitals for 5 full minutes.",
-    "Have sex on a blanket on the bedroom floor.",
-    "Do 69 position and try to make each other moan the loudest.",
+    "Have sex on a blanket on the bedroom floor in any position you choose.",
+    "Do **69 position** and try to make each other moan the loudest.",
     "Move to the dining table—lie back while your partner pleasures you orally.",
-    "Try lotus position (sitting face-to-face) and maintain eye contact the whole time.",
+    "Try **lotus position** (sitting face-to-face) and maintain eye contact the whole time.",
     "Give your partner a lap dance in the chair, ending with grinding.",
     "Explore each other's backsides with gentle kisses and caresses (no penetration unless wanted).",
-    "Have slow, passionate sex in the missionary position but with hands pinned above head.",
-    "Try standing doggy in the hallway or doorway.",
+    "Have slow, passionate sex in **missionary** but with hands pinned above head.",
+    "Try **standing doggy** in the hallway or doorway.",
     "Whisper dirty compliments about specific body parts while touching them softly.",
     "Use your tongue to spell out love words on your partner's stomach and lower.",
-    "Have sex against the wall in the living room.",
-    "Try the butterfly position (partner on edge of bed, legs up).",
+    "Have sex against the wall in the living room in a **standing carry** or wall-supported position.",
+    "Try the **butterfly position** (partner on edge of bed, legs up).",
     "Give each other a sensual scalp and hair massage that turns into neck kisses.",
     "Blindfold your partner and feed them strawberries or chocolate from your fingers sensually.",
     "Try a new position you both looked up earlier (or pick one now).",
     "Have oral sex in the guest bedroom or another unused room.",
     "Tease each other's nipples with tongue and breath only for 4 minutes.",
-    "Do prone bone (flat on stomach) with slow hip movements.",
-    "Move to the bathroom sink—have sex while watching in the mirror.",
+    "Do **prone bone** (flat on stomach) with slow hip movements.",
+    "Move to the bathroom sink—have sex while watching in the mirror (standing or seated).",
     "Take turns being completely still while the other explores with mouth only.",
-    "Try scissoring or thigh-riding if it appeals to you.",
+    "Try **scissoring** or thigh-riding if it appeals to you.",
     "Give a long, teasing oral session focusing only on the tip/head.",
-    "Have passionate sex on the stairs (be careful!).",
+    "Have passionate sex on the stairs (be careful — try **stairway doggy** or seated).",
     "Describe in detail what you love about your partner's scent while kissing their skin.",
-    "Try wheelbarrow position for fun and challenge (short time).",
+    "Try **wheelbarrow position** for fun and challenge (short time).",
     "Kiss every freckle/mole/birthmark you can find on each other's body.",
     "Have sex in the walk-in closet or small space for intimacy.",
     "Use feather-light touches all over for 6 minutes—no rushing to genitals.",
-    "Try Amazon position or another less common one you agree on.",
+    "Try **Amazon position** or another less common one you agree on.",
     "Give your partner oral while they stand and you kneel.",
-    "Move to the laundry room—sex on the washing machine (if off).",
+    "Move to the laundry room—sex on the washing machine (if off) in **seated cowgirl**.",
     "Blindfold and guide each other around the house touching only with bodies.",
     "Spend 5 minutes just making out like teenagers—no hands below waist.",
-    "Try side-by-side scissors position for mutual grinding.",
+    "Try **side-by-side scissors** position for mutual grinding.",
     "Worship your partner's thighs with long slow licks and kisses.",
-    "Have sex in the armchair—straddle and ride.",
+    "Have sex in the armchair—straddle and ride in **chair cowgirl**.",
     "Use your voice only (moans, whispers) to turn each other on without touch for 2 min.",
-    "Try the pretzel dip position (variation of doggy with leg up).",
+    "Try the **pretzel dip** position (variation of doggy with leg up).",
     "Give each other a body-to-body slide massage with oil or lotion.",
     "Have oral in the pantry or kitchen island.",
     "Describe your hottest shared memory while slowly fingering/being fingered.",
     "Try standing 69 (if strong enough) or modified version.",
     "Move to the balcony/porch (if private) for risky outdoor feel.",
     "Spend 4 minutes tracing each other's lips, jaw, collarbone with tongue.",
-    "Try the seated scissors or face-sitting variation.",
+    "Try **seated scissors** or face-sitting variation.",
     "Kiss and lick armpits, inner elbows, behind knees—sensitive spots.",
-    "Have slow sex in the bathtub (dry or with little water).",
+    "Have slow sex in the bathtub (dry or with little water) in **seated lotus**.",
     "Blindfold your partner and lead them to a new room for surprise sex.",
-    "Try the eagle position (legs wide, deep penetration).",
+    "Try the **eagle position** (legs wide, deep penetration missionary variation).",
     "Give a sensual ear-licking and breathing session.",
-    "Have sex on the rug in front of the fireplace/TV.",
+    "Have sex on the rug in front of the fireplace/TV in **prone** or **spooning**.",
     "Take turns directing the pace and depth verbally.",
-    "Try a fantasy role-play starter (e.g. strangers meeting).",
+    "Try a fantasy role-play starter (e.g. strangers meeting) in any position.",
     "Focus only on manual stimulation of each other for 7 minutes.",
     "Have passionate standing sex in the bedroom doorway.",
     "Worship feet/ankles with kisses and gentle massage.",
-    "Try the bridge position (if flexible) or modified arch.",
+    "Try the **bridge position** (if flexible) or modified arch.",
     "Describe what you'd do in a public place fantasy while touching.",
-    "Move to the office desk/home workspace for sex.",
+    "Move to the office desk/home workspace for sex in **desk missionary** or **bent over**.",
     "Give long oral while maintaining eye contact as much as possible.",
-    "Try piledriver position (carefully!).",
+    "Try **piledriver position** (carefully!).",
     "Spend time just breathing together skin-to-skin, no movement.",
-    "Have sex against the window (curtains optional for thrill).",
+    "Have sex against the window (curtains optional for thrill) in standing position.",
     "Tease with breath and whispers on genitals without contact.",
-    "Try the crab walk or another acrobatic position.",
+    "Try the **crab walk** or another acrobatic position.",
     "Give a prostate/perineum massage if both comfortable (external only).",
     "Have oral in the garage or basement for different vibe.",
     "Blindfold and use ice cubes from freezer on sensitive areas.",
-    "Try the seashell position (deep missionary variation).",
+    "Try the **seashell position** (deep missionary variation with legs back).",
     "Kiss and lick every finger and toe slowly.",
-    "Have sex on yoga mat or exercise space.",
+    "Have sex on yoga mat or exercise space in creative floor positions.",
     "Describe your dirtiest dream about partner while grinding.",
-    "Try the hot seat position (one sitting, one riding facing away).",
+    "Try the **hot seat** position (one sitting, one riding facing away).",
     "Give long sensual back and butt massage leading to rimming if desired.",
     "Have sex in the attic or unusual storage space.",
     "Spend 5 min just edging each other without orgasm.",
-    "Try the Viennese oyster (legs back over head).",
+    "Try the **Viennese oyster** (legs back over head).",
     "Worship partner's hair—run fingers, kiss, smell.",
     "Have oral while partner is bent over furniture.",
-    "Move to the hallway—sex against the wall.",
+    "Move to the hallway—sex against the wall in standing variation.",
     "Try mutual masturbation while facing each other and describing sensations.",
     "Give a full-body kiss trail from head to toes and back up.",
     "Have passionate sex in the master closet.",
     "Blindfold and play 'guess which body part I'm kissing'.",
-    "Try the corkscrew position (sideways twist).",
+    "Try the **corkscrew position** (sideways twist).",
     "Focus on neck and throat kisses/bites for arousal.",
-    "Have sex on the piano/bench if you have one.",
+    "Have sex on the piano/bench if you have one in seated position.",
     "Describe partner's body in the sexiest poetic way while touching.",
     "Try standing oral with one partner against wall.",
     "Give long slow oral to completion if desired.",
     "Move to the backyard (private) or near window for thrill.",
     "Spend time tracing each other's tattoos/scars with tongue.",
-    "Try the ballet dancer position (standing, one leg up).",
+    "Try the **ballet dancer** position (standing, one leg up).",
     "Whisper fantasies about future adventures while teasing.",
     "Have sex in the guest shower or tub.",
     "Blindfold and feed each other sensual foods from fridge.",
-    "Try the snow angel position (on back, legs moving).",
+    "Try the **snow angel** position (on back, legs moving).",
     "Give sensual hair pulling and scalp massage.",
     "Have oral on the stairs.",
     "Describe what turns you on most about partner's moans.",
-    "Try the deck chair position (reclined variation).",
+    "Try the **deck chair** position (reclined variation).",
     "Focus only on kissing for 10 full minutes.",
     "Have sex in the pantry between shelves.",
     "Worship partner's hands—kiss palms, suck fingers.",
-    "Try the anvil position (missionary with legs high).",
+    "Try the **anvil position** (missionary with legs high).",
     "Give a long teasing session focusing on lower belly only.",
     "Move to the home gym or workout area for sex.",
     "Blindfold and explore with only your breath and whispers.",
-    "Try the standing split or creative standing position.",
+    "Try the **standing split** or creative standing position.",
     "Spend time just cuddling naked and talking dirty.",
     "Have passionate sex in every room once (mini-challenge).",
     "Describe your ideal morning sex routine while acting parts out.",
-    "Try the X position (legs crossed).",
+    "Try the **X position** (legs crossed).",
     "Give long sensual oral to the point of begging.",
     "Have sex against the fridge door.",
     "Blindfold partner and lead to surprise location for pleasure.",
     "Focus on nipple/chest worship for extended time.",
-    "Try the lotus with rocking motion only.",
+    "Try the **lotus** with rocking motion only.",
     "Whisper commands and obey each other softly.",
     "Have oral in the car (if parked private).",
     "Spend 8 minutes on slow sensual full-body exploration.",
@@ -242,21 +251,38 @@
     "Have sex on fresh sheets you just changed together.",
     "Blindfold and play follow-the-leader with bodies.",
     "End with slow, loving missionary while saying what you love.",
-    "Pick any previous dare and do it twice as long."
+    "Pick any previous dare and do it twice as long.",
+    "Try **coital alignment technique (CAT)** — rocking instead of thrusting for intense clit contact.",
+    "Do **flat iron** (prone with hips slightly raised) for deep sensation.",
+    "Attempt **standing carry** — one partner holds the other against a wall.",
+    "Explore **face-sitting** (queening) for oral control.",
+    "Try **sideways 69** for comfortable mutual oral.",
+    "Experiment with **arch** or bridge variation in missionary.",
+    "Do **lazy dog** — relaxed doggy with both lying flat.",
+    "Try **froggy style** — squatting version of doggy for deeper thrusts.",
+    "Play with **spooning scissor** variation for grinding intimacy."
   ];
 
   let currentTimer = null;
   let timeLeft = 0;
   let isRunning = false;
+  let currentDareText = "";
 
   function drawDare() {
     const randomIndex = Math.floor(Math.random() * dares.length);
-    const selected = dares[randomIndex];
+    currentDareText = dares[randomIndex];
     
-    document.getElementById('dare-text').innerText = selected;
+    document.getElementById('dare-text').innerText = currentDareText;
     
-    // Check if this dare mentions time
-    const timeMatch = selected.match(/(\d+)\s*(minute|min)/i);
+    // Show visual button if it looks like a position dare
+    if (currentDareText.includes("position") || currentDareText.includes("**") || /cowgirl|doggy|missionary|lotus|69|spooning|reverse|prone|butterfly|eagle/i.test(currentDareText)) {
+      document.getElementById('visual-btn').style.display = 'inline-block';
+    } else {
+      document.getElementById('visual-btn').style.display = 'none';
+    }
+    
+    // Timer check
+    const timeMatch = currentDareText.match(/(\d+)\s*(minute|min)/i);
     if (timeMatch) {
       timeLeft = parseInt(timeMatch[1]) * 60;
       document.getElementById('timer').innerText = formatTime(timeLeft);
@@ -267,9 +293,22 @@
       disableTimerControls();
     }
     
-    // Stop any running timer
     if (currentTimer) clearInterval(currentTimer);
     isRunning = false;
+  }
+
+  function showVisual() {
+    if (!currentDareText) return;
+    
+    // Extract likely position name
+    let pos = "sex position illustration diagram";
+    const match = currentDareText.match(/\*\*(.+?)\*\*|(\b(?:missionary|doggy|cowgirl|reverse|lotus|69|spooning|prone|butterfly|eagle|pretzel|piledriver|seashell|amazon)\b)/i);
+    if (match) {
+      pos = (match[1] || match[2] || "sex position") + " illustration diagram";
+    }
+    
+    const searchUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(pos)}`;
+    window.open(searchUrl, '_blank');
   }
 
   function formatTime(seconds) {
@@ -299,8 +338,7 @@
 
   function resetTimer() {
     pauseTimer();
-    const dareText = document.getElementById('dare-text').innerText;
-    const timeMatch = dareText.match(/(\d+)\s*(minute|min)/i);
+    const timeMatch = currentDareText.match(/(\d+)\s*(minute|min)/i);
     if (timeMatch) {
       timeLeft = parseInt(timeMatch[1]) * 60;
       document.getElementById('timer').innerText = formatTime(timeLeft);
