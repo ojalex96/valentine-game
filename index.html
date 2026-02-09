@@ -1,54 +1,261 @@
-import random
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentine's Dare Night – Explore Together</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    h1 {
+      margin: 20px 0;
+      font-size: 2.8em;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    }
+    #container {
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    #dare {
+      font-size: 1.4em;
+      line-height: 1.5;
+      margin: 30px 0;
+      min-height: 120px;
+      padding: 20px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 15px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    button {
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-size: 1.3em;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.25s;
+      box-shadow: 0 6px 20px rgba(255,51,102,0.5);
+    }
+    button:hover {
+      transform: scale(1.08);
+      background: #ff1a53;
+    }
+    button:active {
+      transform: scale(0.96);
+    }
+    #counter {
+      font-size: 1.1em;
+      margin-top: 20px;
+      opacity: 0.9;
+    }
+    footer {
+      margin-top: auto;
+      padding: 20px 0;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
 
-# List of random sexual acts for exploration. These focus on body parts, positions, fantasies, and locations in the house.
-# No sex toys included. All acts are consensual and for adults.
-acts = [
-    "Sensually kiss and lick your partner's neck while whispering compliments.",
-    "Explore your partner's earlobes with gentle nibbles and breaths.",
-    "Massage and kiss the inner thighs, building anticipation slowly.",
-    "Try the missionary position with deep eye contact and slow thrusts.",
-    "Engage in doggy style position, focusing on rhythmic movements.",
-    "Have your partner on top in cowgirl position, letting them control the pace.",
-    "Spoon together in the spooning position for intimate, close contact.",
-    "Attempt standing sex against a wall for an adventurous feel.",
-    "Roleplay as strangers meeting for the first time in a bar scenario.",
-    "Pretend to be a doctor and patient examining each other intimately.",
-    "Act out a teacher and student fantasy with playful instructions.",
-    "Roleplay boss and employee in a power dynamic scene.",
-    "Have sex in the kitchen, using the counter for support.",
-    "Move to the living room couch for a cozy, spontaneous session.",
-    "Try intimacy in the shower, with water adding to the sensations.",
-    "Explore on the dining table for a change of scenery.",
-    "Focus on nipple play: licking, sucking, and gentle pinching.",
-    "Kiss and caress the back and spine for relaxing arousal.",
-    "Tease the buttocks with massages and light spanks.",
-    "Explore oral pleasure on genitals, taking turns slowly.",
-    "Use hands to stimulate each other's erogenous zones simultaneously.",
-    "Try 69 position for mutual oral exploration.",
-    "Incorporate light biting on shoulders and arms.",
-    "Focus on foot massages leading to toe sucking if desired.",
-    "Roleplay historical figures in a romantic encounter.",
-    "Pretend to be celebrities in a secret affair fantasy.",
-    "Have sex in the hallway for a quick, exciting thrill.",
-    "Move to the bathroom sink area for mirrored views.",
-    "Experiment with reverse cowgirl position for a new angle.",
-    "Try lotus position sitting face-to-face for deep connection.",
-    "Incorporate fantasy of being watched (imaginary) to heighten excitement.",
-    "Roleplay as adventurers discovering each other's 'treasures'."
-]
+  <div id="container">
+    <h1>Valentine's Dare Night 💕🔥</h1>
+    <p>Take turns pressing the button for a random sensual dare.<br>Explore, communicate, enjoy & stay safe/consensual!</p>
 
-def main():
-    print("Welcome to your Valentine's Day Sexual Exploration Game!")
-    print("This game generates random acts for you and your partner to try.")
-    print("Press Enter to get a new act, or type 'quit' to exit.\n")
-    
-    while True:
-        user_input = input("Press Enter for a random act (or 'quit' to exit): ").strip().lower()
-        if user_input == 'quit':
-            print("Thanks for playing! Have a wonderful Valentine's Day!")
-            break
-        random_act = random.choice(acts)
-        print(f"Random Act: {random_act}\n")
+    <div id="dare">Press "New Dare" to begin your spicy adventure…</div>
 
-if __name__ == "__main__":
-    main()
+    <button onclick="getRandomDare()">New Dare 💋</button>
+    <button onclick="resetGame()">Reset Game</button>
+
+    <div id="counter">Dares completed: 0</div>
+  </div>
+
+  <footer>Made with love for intimate exploration • February 2026</footer>
+
+  <script>
+    const dares = [
+      "Spend 3 minutes kissing and nibbling only on your partner's neck and collarbone.",
+      "Trace slow circles with your tongue around your partner's nipples without touching them directly.",
+      "Give a slow, sensual massage to your partner's inner thighs, getting teasingly close but not touching genitals.",
+      "Whisper your hottest fantasy about your partner while gently stroking their back.",
+      "Try missionary position but maintain constant eye contact and kiss deeply every 10 seconds.",
+      "Switch to doggy style and focus on slow, deep thrusts while holding hips firmly.",
+      "Let your partner ride you in cowgirl position while you caress their chest and tell them how sexy they look.",
+      "Do reverse cowgirl and let your partner control the rhythm completely.",
+      "Try spooning sex position — cuddle close and move together slowly and intimately.",
+      "Have standing sex against a wall; one partner lifts the other's leg for deeper access.",
+      "Experiment with lotus position: sit face-to-face, legs wrapped around each other, rocking gently.",
+      "Roleplay as strangers who just met at a bar and seduce each other.",
+      "Act out a fantasy where one is a powerful boss and the other is an eager employee.",
+      "Pretend you're a seductive teacher giving 'private lessons' to a willing student.",
+      "Roleplay doctor and patient — perform a very thorough 'examination'.",
+      "Fantasy: You're secret agents on a mission who need to 'hide' by having passionate sex.",
+      "Move to the kitchen counter for sex — use it for support or bending over.",
+      "Have sex on the living room couch in any position you choose.",
+      "Try intimacy in the shower — let warm water run over you while exploring each other.",
+      "Use the dining table: one partner lies back while the other pleasures them orally.",
+      "Quickie in the hallway — pressed against the wall with urgency.",
+      "Sex in the bathroom in front of the mirror so you can both watch.",
+      "On the bedroom floor with blankets — roll around freely.",
+      "Try the guest room or spare bedroom for a 'new place' feeling.",
+      "Focus exclusively on oral pleasure: take turns going down on each other slowly.",
+      "Do 69 position and synchronize your movements for mutual pleasure.",
+      "Use only hands to bring your partner to the edge, then switch roles.",
+      "Kiss and lick every inch of your partner's back from neck to tailbone.",
+      "Gentle biting along shoulders, collarbone, and inner thighs.",
+      "Suck and tease earlobes while whispering dirty compliments.",
+      "Massage and kiss the soles of feet, then slowly move up calves.",
+      "Trace letters or words on your partner's stomach with your tongue.",
+      "Blindfold your partner and tease their body with only kisses and light touches.",
+      "Give a sensual lap dance — clothing optional after the first minute.",
+      "Undress each other using only your mouths and teeth — no hands.",
+      "Perform a slow striptease for your partner while they watch.",
+      "Kiss your partner's entire body except genitals for 5 full minutes.",
+      "Try the bridge position variation in missionary for deeper penetration.",
+      "Experiment with scissors position for intimate grinding and eye contact.",
+      "One partner lies flat while the other straddles their thigh and grinds.",
+      "Fantasy: You're vampires seducing and biting (gently) each other.",
+      "Roleplay as royalty — one is a king/queen, the other a devoted servant.",
+      "Pretend you're in a forbidden romance that must stay secret.",
+      "Sex on the stairs — use different levels for creative angles.",
+      "Try the laundry room — against the washing machine or dryer.",
+      "Have sex standing in the closet for a tight, intimate space.",
+      "Focus on nipple play only: licking, sucking, gentle pinching for 4 minutes.",
+      "Use your fingers to explore and stimulate your partner's G-spot/prostate area externally.",
+      "Give a prostate massage (external) or perineum pressure while giving oral.",
+      "Try face-sitting for oral pleasure — receiver controls the pressure.",
+      "Alternate between fast and slow thrusts for 2 minutes each in any position.",
+      "One partner gives oral while the other describes a fantasy out loud.",
+      "Kiss with lots of tongue while grinding against each other clothed first.",
+      "Try sex with one partner wearing only socks/stockings for added sensation.",
+      "Roleplay as coworkers staying late at the office — get 'caught' together.",
+      "Fantasy: You're pirates who captured each other and now 'ravish'.",
+      "Sex in the backyard (if private) or near an open window for thrill.",
+      "On the balcony/porch — night time only if private.",
+      "Try the wheelbarrow position for playful strength and angle.",
+      "Experiment with butterfly position: receiver on edge of bed, legs up.",
+      "Slow, teasing oral — stop right at the edge, repeat 3 times.",
+      "Use ice cubes from the freezer to trace over nipples and inner thighs.",
+      "Warm breath followed by cool breath on sensitive areas.",
+      "One partner lies still while the other worships their body for 5 minutes.",
+      "Try sex while both partners keep one hand behind their back.",
+      "Roleplay as superheroes saving each other with passionate sex.",
+      "Fantasy: You're time travelers meeting in different eras.",
+      "Have sex in the garage — on a workbench or car hood if clean.",
+      "Try the pretzel position for deep penetration and closeness.",
+      "Alternate who is on top every 60 seconds for 6 minutes.",
+      "Sensual hair pulling (gentle) during doggy style or from behind.",
+      "Neck kissing + hickey giving (if both enjoy marks).",
+      "Try sex sitting on a chair — one partner in lap facing away.",
+      "Fantasy: You're celebrities having a secret hotel affair.",
+      "Roleplay as neighbors who finally give in to attraction.",
+      "Focus on mutual masturbation while watching each other.",
+      "Give a foot massage that turns into toe sucking and licking up legs.",
+      "Try the seashell position: receiver's legs pulled back far.",
+      "Sex while both partners whisper compliments and dirty talk.",
+      "Blindfold + earplugs (optional) for heightened touch only.",
+      "Roleplay as chef and food critic — 'taste testing' body parts.",
+      "Fantasy: You're explorers discovering new 'territories' on each other.",
+      "Have sex in the pantry — tight space adds excitement.",
+      "Try standing doggy with one partner bent over furniture.",
+      "Slow sensual 69 with lots of pausing and teasing.",
+      "One partner gives directions while the other follows exactly.",
+      "Fantasy: You're in a spy movie — sex to 'steal secrets'.",
+      "Roleplay as personal trainer and client — very hands-on session.",
+      "Try sex on a yoga mat in living room — stretch into positions.",
+      "Use pillows to prop up hips for better angles in missionary.",
+      "Alternate oral every 30 seconds — race to make the other moan first.",
+      "Sensual spanking during doggy — light and consensual only.",
+      "Fantasy: You're in a fairy tale — prince/princess rescue sex.",
+      "Roleplay as flight attendant and passenger — mile high fantasy.",
+      "Try the crab walk position variation for fun and depth.",
+      "Sex with eyes closed — focus only on touch and sound.",
+      "One partner blindfolded while the other guides their hands.",
+      "Fantasy: You're rock stars after a concert — groupie scenario.",
+      "Roleplay as artist and nude model — then 'paint' with body.",
+      "Try sex against the bedroom door — standing and urgent.",
+      "Slow build-up: 10 minutes foreplay minimum before penetration.",
+      "Use different rhythms: slow-deep → fast-shallow → repeat.",
+      "Fantasy: You're in a romance novel — dramatic love scene.",
+      "Roleplay as lifeguard saving drowning victim — mouth-to-mouth + more.",
+      "Try the anvil position: receiver's legs on shoulders.",
+      "Mutual body painting with edible items (chocolate syrup, etc.) then lick off.",
+      "Sex while listening to a sexy playlist — match rhythm to beat.",
+      "One partner on all fours while the other teases from behind.",
+      "Fantasy: You're gods/goddesses making love on Mount Olympus.",
+      "Roleplay as detective and suspect — interrogation with pleasure.",
+      "Try sex in the attic/basement for adventurous feel.",
+      "Sensual full-body rubbing — oil or lotion if available.",
+      "Alternate who initiates each new position change.",
+      "Fantasy: You're in a heist movie — quick passionate moment before escape.",
+      "Roleplay as massage therapist and client — very happy ending.",
+      "Try the snow angel sex position on bed — arms/legs spread.",
+      "Focus only on external stimulation for 10 minutes — no penetration.",
+      "One partner gives oral while the other reads erotic story aloud.",
+      "Sex in the morning light if possible — natural setting.",
+      "Try the Amazon position: dominant partner on top in squat.",
+      "Roleplay as alien and earthling — first contact intimacy.",
+      "Fantasy: You're time-stopped and can do anything.",
+      "Sensual hair brushing/combing leading to scalp massage then sex.",
+      "Try sex with one partner wearing partner's shirt/underwear.",
+      "Blindfolded taste test: guess body parts by licking.",
+      "Fantasy: You're in a dream sequence — surreal lovemaking.",
+      "Roleplay as personal chef — feeding each other then sex.",
+      "Try the T-square position for unique angle and closeness.",
+      "One partner dictates pace while the other follows commands.",
+      "Sex while both partners maintain eye contact as much as possible.",
+      "Fantasy: You're soulmates reuniting after centuries.",
+      "Roleplay as photographer and model — sexy photoshoot then sex.",
+      "Try sex on exercise ball (if you have one) for bouncy fun.",
+      "Slow, tantric-style breathing together during penetration.",
+      "One partner blindfolded while the other surprises with locations.",
+      "Fantasy: You're in a forbidden love story — dramatic passion.",
+      "Roleplay as bartender and patron — closing time seduction.",
+      "Try the standing 69 variation if strong enough — or modified.",
+      "Sensual whispering game: say one dirty thing, then act on it.",
+      "Sex in low lighting with candles (safely) for romantic mood.",
+      "One partner on knees giving oral while other stands and directs.",
+      "Fantasy: You're in a post-apocalyptic world — last survivors.",
+      "Roleplay as librarian and patron — quiet but naughty.",
+      "Try the Viennese oyster position: receiver curled, legs high.",
+      "Mutual edging: bring each other close 3 times before release.",
+      "Sex while both partners say 'I love you' or compliments constantly."
+    ];
+
+    let count = 0;
+
+    function getRandomDare() {
+      const randomIndex = Math.floor(Math.random() * dares.length);
+      document.getElementById("dare").innerText = dares[randomIndex];
+      count++;
+      document.getElementById("counter").innerText = `Dares completed: ${count}`;
+    }
+
+    function resetGame() {
+      document.getElementById("dare").innerText = "Press 'New Dare' to begin your spicy adventure…";
+      count = 0;
+      document.getElementById("counter").innerText = `Dares completed: ${count}`;
+    }
+
+    // Optional: first load can show one random
+    // getRandomDare();
+  </script>
+
+</body>
+</html>
