@@ -95,56 +95,70 @@
 <button class="btn spin-btn" onclick="runGame()">Spin the Fate</button>
 
 <script>
-  // JS GOES HERE
-  const verbs = ["Slowly lick", "Gently nibble", "Softly massage", "Passionately kiss", "Trace with ice on", "Sensually caress", "Whisper to"];
-  const areas = ["the neck", "the inner thigh", "the ears", "the lower back", "the collarbone", "the spine", "the palm"];
-
-  let pool = [];
-  function buildPool() {
-    for (let i = 0; i < 200; i++) {
-      let v = verbs[Math.floor(Math.random() * verbs.length)];
-      let a = areas[Math.floor(Math.random() * areas.length)];
-      // 50% chance for a timed dare
-      let timed = Math.random() > 0.5;
-      pool.push(timed ? v + " " + a + " for 60 seconds" : v + " " + a);
+  const sensoryActs = [
+    { 
+        verb: "Trace your tongue slowly along", 
+        areas: ["the dip of the collarbone", "the sensitive inner thigh", "the curve of the hip", "the line of the spine"],
+        timed: true 
+    },
+    { 
+        verb: "Apply firm, warm-oil pressure to", 
+        areas: ["the lower back", "the arches of the feet", "the back of the neck"],
+        timed: true 
+    },
+    { 
+        verb: "Exhale warm breath and soft nibbles against", 
+        areas: ["the earlobe", "the side of the neck", "the shoulder"],
+        timed: false 
+    },
+    { 
+        verb: "Lightly trail your fingernails (or a feather) over", 
+        areas: ["the stomach", "the inner forearms", "the backs of the knees"],
+        timed: true 
+    },
+    { 
+        verb: "Blindfold your partner and explore", 
+        areas: ["their chest with your lips", "their palms with your tongue"],
+        timed: true 
+    },
+    { 
+        verb: "Whisper your most forbidden desire while kissing", 
+        areas: ["their neck", "their jawline"],
+        timed: false 
     }
-  }
-  buildPool();
+];
 
-  let interval;
+// Special "Wildcard" dares for deeper exploration
+const wildcards = [
+    "Maintain deep eye contact for 60 seconds without speaking or touching.",
+    "Describe exactly how you want to be touched right now.",
+    "Switch roles: One becomes the 'Director' and the other the 'Performer' for 5 minutes.",
+    "Remove one piece of your partner's clothing... as slowly as humanly possible."
+];
 
-  function runGame() {
-    // Reset Everything
-    clearInterval(interval);
-    document.getElementById('timer-area').style.display = "none";
-    document.getElementById('start-btn').style.display = "inline-block";
-    document.getElementById('timer-clock').innerText = "01:00";
-    
-    document.getElementById('dare-display').innerText = "Selecting...";
-    document.getElementById('status').innerText = "Shuffling the Deck";
+let pool = [];
 
-    setTimeout(() => {
-      const result = pool.pop();
-      document.getElementById('dare-display').innerText = result;
-      document.getElementById('status').innerText = "Dare Active";
+function buildPool() {
+    // 1. Add specific high-end dares
+    pool = [...wildcards];
 
-      if (result.includes("seconds")) {
-        document.getElementById('timer-area').style.display = "block";
-      }
-    }, 700);
-  }
+    // 2. Generate the rest using smart pairing
+    while (pool.length < 200) {
+        const set = sensoryActs[Math.floor(Math.random() * sensoryActs.length)];
+        const area = set.areas[Math.floor(Math.random() * set.areas.length)];
+        
+        // Add time only if the action benefits from a slow burn
+        const dare = set.timed ? `${set.verb} ${area} for 60 seconds` : `${set.verb} ${area}`;
+        
+        if (!pool.includes(dare)) {
+            pool.push(dare);
+        }
+    }
+    // Shuffle the final deck
+    pool.sort(() => Math.random() - 0.5);
+}
 
-  function startClock() {
-    let time = 60;
-    document.getElementById('start-btn').style.display = "none";
-    interval = setInterval(() => {
-      time--;
-      let s = time < 10 ? "0" + time : time;
-      document.getElementById('timer-clock').innerText = "00:" + s;
-      if (time <= 0) {
-        clearInterval(interval);
-        document.getElementById('status').innerText = "Time Up!";
-      }
-    }, 1000);
-  }
+buildPool();
+
+// ... (Rest of the timer and display functions remain the same)
 </script>
