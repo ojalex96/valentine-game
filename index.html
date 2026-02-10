@@ -3,147 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Sex Game - 210+ Dares</title>
+    <title>Valentine's Day Dare Game – 210 Balanced Dares</title>
     <style>
         body {
-            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            background: linear-gradient(to bottom, #ff9a9e 0%, #fad0c4 100%);
             color: #333;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding: 20px;
+            padding: 20px 10px;
             margin: 0;
-        }
-        h1 { color: #c2185b; font-size: 2.8em; margin-bottom: 10px; }
-        p.intro { font-size: 1.2em; max-width: 700px; margin: 0 auto 20px; }
-        button {
-            background: #e91e63;
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 1.6em;
-            cursor: pointer;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(233,30,99,0.4);
-            transition: all 0.3s;
-        }
-        button:hover { background: #d81b60; transform: scale(1.05); }
-        #dareDisplay {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px auto;
-            max-width: 900px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            font-size: 1.35em;
             line-height: 1.5;
         }
-        #timer {
-            font-size: 3em;
-            color: #c2185b;
-            font-weight: bold;
-            margin: 25px 0;
+        h1 { color: #c2185b; font-size: 2.6em; margin: 10px 0 5px; }
+        .intro { font-size: 1.15em; max-width: 720px; margin: 0 auto 25px; color: #444; }
+        .main-btn {
+            background: #e91e63; color: white; border: none; padding: 16px 36px;
+            font-size: 1.5em; cursor: pointer; border-radius: 50px;
+            box-shadow: 0 5px 18px rgba(233,30,99,0.35); transition: all 0.25s; margin: 12px;
         }
-        img.position-img {
-            max-width: 100%;
-            height: auto;
-            margin: 25px auto;
-            border: 4px solid #f48fb1;
-            border-radius: 15px;
-            display: block;
+        .main-btn:hover { background: #d81b60; transform: scale(1.04); }
+        #dareDisplay {
+            background: rgba(255,255,255,0.96); border-radius: 18px; padding: 28px;
+            margin: 30px auto; max-width: 880px; box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+            font-size: 1.28em;
         }
-        .error { color: #d32f2f; font-style: italic; font-size: 1.1em; }
-        .highlight { color: #e91e63; font-weight: bold; }
+        .dare-title { color: #c2185b; font-weight: bold; font-size: 1.4em; margin-bottom: 12px; }
+        .dare-category { font-size: 1.1em; color: #555; margin-bottom: 8px; font-style: italic; }
+        .dare-desc { font-style: italic; color: #555; margin: 14px 0; }
+        img.position-img { max-width: 100%; height: auto; margin: 20px auto; border: 3px solid #f48fb1; border-radius: 12px; display: block; }
+        .error { color: #d32f2f; font-style: italic; }
+        #timer-container { margin: 30px 0; font-size: 2.6em; font-weight: bold; color: #c2185b; }
+        #timer-display { min-width: 160px; display: inline-block; }
+        .timer-btn {
+            background: #9c27b0; color: white; border: none; padding: 10px 22px;
+            font-size: 1em; cursor: pointer; border-radius: 30px; margin: 6px; min-width: 90px;
+        }
+        .timer-btn:hover { background: #7b1fa2; }
+        .timer-btn:disabled { background: #ccc; cursor: not-allowed; }
     </style>
 </head>
 <body>
-    <h1>Valentine's Day Sex Dare Game ❤️🔥</h1>
-    <p class="intro">Draw a random sexy dare for you and your partner. No repeats. Positions include how-to guides + visuals. Timers run automatically when needed. Have fun and stay safe/consensual!</p>
-    <button onclick="drawDare()">Draw Your Dare</button>
-    <div id="dareDisplay">Ready? Click to begin your naughty adventure…</div>
-    <div id="timer"></div>
+    <h1>Valentine's Day Dare Game ❤️‍🔥</h1>
+    <p class="intro">210 dares balanced across 5 categories for variety: Sex Positions, Foreplay & Sensual Tease, Oral & Intimate Acts, Naughty & Kinky Play, Playful & Adventurous Challenges. Timed dares have controls. No repeats. Stay consensual & enjoy!</p>
+
+    <button class="main-btn" onclick="drawDare()">Draw Next Dare</button>
+
+    <div id="dareDisplay">Click to reveal your next dare…</div>
+
+    <div id="timer-container" style="display:none;">
+        <div id="timer-display">00:00</div>
+        <div style="margin-top: 18px;">
+            <button class="timer-btn" id="startBtn" onclick="startTimer()">Start</button>
+            <button class="timer-btn" id="pauseBtn" onclick="pauseTimer()" disabled>Pause</button>
+            <button class="timer-btn" id="resetBtn" onclick="resetTimer()" disabled>Reset</button>
+        </div>
+    </div>
 
     <script>
-        let dares = [
-            // === Positions (with reliable educational images where available) ===
-            { text: "Missionary – but make it slow and deep for 5 minutes", type: 'position', time: 300, desc: "Receiver lies on back, legs spread; giver on top. Focus on eye contact, kissing, and slow thrusts.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/missionary-1296x807.png" },
-            { text: "Cowgirl – ride your partner for 5 minutes", type: 'position', time: 300, desc: "Giver lies on back; receiver straddles facing them and controls rhythm.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/ride-1296x806.png" },
-            { text: "Doggy Style – 5 minutes of intense thrusting", type: 'position', time: 300, desc: "Receiver on hands/knees; giver enters from behind.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/doggy-1296x806.png" },
-            { text: "Spooning – cozy side-by-side sex for 5 minutes", type: 'position', time: 300, desc: "Both on sides, giver behind receiver; intimate and gentle.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/spoon-1296x807.png" },
-            { text: "Reverse Cowgirl – give your partner a view for 5 minutes", type: 'position', time: 300, desc: "Receiver straddles facing away.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/reverse-1296x806.png" },
-            { text: "Lotus – sit facing each other and rock together for 5 minutes", type: 'position', time: 300, desc: "Both seated, legs wrapped around each other.", imageUrl: "" },
-            { text: "Standing Doggy against a wall or counter – 4 minutes", type: 'position', time: 240, desc: "Receiver bends over; giver stands behind.", imageUrl: "" },
-            { text: "69 – mutual oral pleasure for 5 minutes", type: 'position', time: 300, desc: "One on top, simultaneous oral sex.", imageUrl: "" },
-            { text: "G-Whiz (legs on shoulders) for 5 minutes", type: 'position', time: 300, desc: "Receiver on back, legs up on giver's shoulders.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/legs-up-1296x807.png" },
-            { text: "Face-Off (seated facing each other) for 5 minutes", type: 'position', time: 300, desc: "Giver sits; receiver straddles and faces them.", imageUrl: "" },
-            // More positions...
-            { text: "Pretzel Dip – 5 minutes", type: 'position', time: 300, desc: "Receiver on side; giver kneels straddling one leg.", imageUrl: "" },
-            { text: "The Seashell – receiver folds legs back for 5 minutes", type: 'position', time: 300, desc: "Deep penetration angle.", imageUrl: "" },
-            { text: "Butterfly – receiver on table edge for 5 minutes", type: 'position', time: 300, desc: "Giver stands; receiver lies on edge with legs up.", imageUrl: "" },
+        const dares = [
+    // Category 1: Sex Positions (42 dares)
+    { category: "Sex Positions", text: "Missionary – slow & connected", type: 'position', time: 300, desc: "Receiver on back, giver on top. Focus on eye contact, kissing, slow deep thrusts.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/missionary-1296x807.png" },
+    { category: "Sex Positions", text: "Cowgirl – ride with control", type: 'position', time: 300, desc: "Giver lies back; receiver straddles facing them and controls rhythm & depth.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/ride-1296x806.png" },
+    { category: "Sex Positions", text: "Doggy Style – deep & intense", type: 'position', time: 300, desc: "Receiver on hands/knees; giver enters from behind for deeper penetration.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/doggy-1296x806.png" },
+    { category: "Sex Positions", text: "Spooning – cozy side-by-side", type: 'position', time: 300, desc: "Both lie on sides; giver behind receiver for intimate gentle thrusting.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/spoon-1296x807.png" },
+    { category: "Sex Positions", text: "Reverse Cowgirl – amazing view", type: 'position', time: 300, desc: "Receiver straddles facing away; great for giver's visual enjoyment.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/reverse-1296x806.png" },
+    { category: "Sex Positions", text: "Lotus – seated face-to-face", type: 'position', time: 300, desc: "Both sit facing each other, legs wrapped; rock slowly for closeness.", imageUrl: "" },
+    { category: "Sex Positions", text: "G-Whiz (legs on shoulders)", type: 'position', time: 300, desc: "Receiver on back, legs up on giver's shoulders for G-spot/P-spot angle.", imageUrl: "https://post.healthline.com/wp-content/uploads/2021/12/legs-up-1296x807.png" },
+    { category: "Sex Positions", text: "69 – mutual oral pleasure", type: 'position', time: 300, desc: "One on top; simultaneous oral for shared ecstasy.", imageUrl: "" },
+    { category: "Sex Positions", text: "Standing Doggy against wall", type: 'position', time: 240, desc: "Receiver bends forward against surface; giver stands behind.", imageUrl: "" },
+    { category: "Sex Positions", text: "Pretzel Dip – twisted deep", type: 'position', time: 300, desc: "Receiver on side; giver kneels straddling one leg for unique angle.", imageUrl: "" },
+    { category: "Sex Positions", text: "Butterfly – receiver on edge", type: 'position', time: 300, desc: "Receiver lies on bed/table edge, legs up; giver stands for easy access.", imageUrl: "" },
+    { category: "Sex Positions", text: "Face Off seated intimacy", type: 'position', time: 300, desc: "Giver sits; receiver straddles facing for kissing & closeness.", imageUrl: "" },
+    { category: "Sex Positions", text: "Coital Alignment Technique (CAT)", type: 'position', time: 300, desc: "Like missionary but giver higher; grinding for clitoral contact.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Seashell – folded deep", type: 'position', time: 300, desc: "Receiver on back, legs folded to chest; deep penetration.", imageUrl: "" },
+    { category: "Sex Positions", text: "Waterfall – head off bed", type: 'position', time: 300, desc: "Receiver lies with head/shoulders off edge; giver stands for rush.", imageUrl: "" },
+    { category: "Sex Positions", text: "Happy Baby yoga style", type: 'position', time: 300, desc: "Receiver on back holding feet; giver kneels for oral/penetration.", imageUrl: "" },
+    { category: "Sex Positions", text: "Leapfrog variation of doggy", type: 'position', time: 300, desc: "Receiver chest down, hips up; giver from behind for deeper feel.", imageUrl: "" },
+    { category: "Sex Positions", text: "Captain – legs raised high", type: 'position', time: 300, desc: "Receiver on back, legs up; giver holds ankles for control.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Hot Seat on chair", type: 'position', time: 300, desc: "Giver sits; receiver backs onto lap facing away for bounce.", imageUrl: "" },
+    { category: "Sex Positions", text: "Pole Position – straddle leg", type: 'position', time: 300, desc: "Giver lies back, one leg bent; receiver straddles raised leg.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Rider Astride lean back", type: 'position', time: 300, desc: "Receiver straddles, leans back on hands for deep angle.", imageUrl: "" },
+    { category: "Sex Positions", text: "Cowboy – receiver lies back", type: 'position', time: 300, desc: "Giver straddles receiver's hips for controlled entry.", imageUrl: "" },
+    { category: "Sex Positions", text: "Magic Mountain – leaning back", type: 'position', time: 300, desc: "Both lean back on hands; rock together for contact.", imageUrl: "" },
+    { category: "Sex Positions", text: "Spider – face-to-face sit", type: 'position', time: 300, desc: "Both sit facing, legs around; pull close for grinding.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Lifted Missionary pillow", type: 'position', time: 300, desc: "Pillow under receiver's hips for better angle in missionary.", imageUrl: "" },
+    { category: "Sex Positions", text: "Reverse Scoop side-by-side", type: 'position', time: 300, desc: "Like missionary but rolled to sides for closeness.", imageUrl: "" },
+    { category: "Sex Positions", text: "One Up – raised leg", type: 'position', time: 300, desc: "Receiver lies, one leg raised; giver kneels holding it.", imageUrl: "" },
+    { category: "Sex Positions", text: "Stairway to Heaven – on stairs", type: 'position', time: 300, desc: "Giver sits on stairs; receiver straddles facing away.", imageUrl: "" },
+    { category: "Sex Positions", text: "Spin Cycle – on washing machine", type: 'position', time: 300, desc: "Receiver on top during machine cycle for vibration.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Little Dipper – tricep dips", type: 'position', time: 300, desc: "Receiver hoists over giver; dips up/down.", imageUrl: "" },
+    { category: "Sex Positions", text: "Standing O – standing oral", type: 'position', time: 240, desc: "Giver kneels; receiver stands with leg over shoulder.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Socket – reverse bend", type: 'position', time: 300, desc: "From reverse cowgirl, receiver bends forward fully.", imageUrl: "" },
+    { category: "Sex Positions", text: "Pearly Gates – lean back", type: 'position', time: 300, desc: "Giver lies back; receiver leans backward onto chest.", imageUrl: "" },
+    { category: "Sex Positions", text: "Face Off wheelchair variation", type: 'position', time: 300, desc: "Seated facing; adaptable for closeness.", imageUrl: "" },
+    { category: "Sex Positions", text: "Stand and Deliver – bicycle legs", type: 'position', time: 300, desc: "Receiver lies back raising legs; giver stands holding ankles.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Cross-Booty X shape", type: 'position', time: 300, desc: "From missionary, turn to sides forming X with limbs.", imageUrl: "" },
+    { category: "Sex Positions", text: "Cowgirl's Helper – assisted bounce", type: 'position', time: 300, desc: "Receiver on top; giver grabs hips to help lift.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Socket Bridge", type: 'position', time: 300, desc: "Receiver bends forward in reverse; plank-like.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Rider Astride lean", type: 'position', time: 300, desc: "Receiver leans back on hands for angle change.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Cowboy straddle", type: 'position', time: 300, desc: "Receiver lies back; giver straddles for tight fit.", imageUrl: "" },
+    { category: "Sex Positions", text: "The G-Whiz variation high legs", type: 'position', time: 300, desc: "Receiver legs high; giver presses for pressure.", imageUrl: "" },
+    { category: "Sex Positions", text: "The Pretzel Dip side straddle", type: 'position', time: 300, desc: "Receiver side; giver straddles bottom leg.", imageUrl: "" },
 
-            // === Timed sensual / foreplay dares ===
-            { text: "Give a full-body sensual massage – 5 minutes", type: 'timed', time: 300 },
-            { text: "Kiss every inch of your partner's neck and ears – 90 seconds", type: 'timed', time: 90 },
-            { text: "Use an ice cube on sensitive areas – 60 seconds", type: 'timed', time: 60 },
-            { text: "Perform oral sex without stopping – 3 minutes", type: 'timed', time: 180 },
-            { text: "Tease your partner's nipples with your tongue – 2 minutes", type: 'timed', time: 120 },
-            { text: "Blindfold your partner and trace their body with fingertips – 4 minutes", type: 'timed', time: 240 },
-            { text: "Edge your partner (bring close to orgasm, then stop) – repeat 3 times", type: 'timed', time: 180 },
-            { text: "Give a slow hand job / fingering – 4 minutes", type: 'timed', time: 240 },
-            { text: "Whisper dirty talk in your partner's ear – 2 minutes straight", type: 'timed', time: 120 },
+    // Category 2: Foreplay & Sensual Tease (42 dares)
+    { category: "Foreplay & Sensual Tease", text: "Full-body sensual massage with oil", type: 'timed', time: 300 },
+    { category: "Foreplay & Sensual Tease", text: "Kiss & nibble neck + ears slowly", type: 'timed', time: 120 },
+    { category: "Foreplay & Sensual Tease", text: "Tease with ice cube on skin", type: 'timed', time: 60 },
+    { category: "Foreplay & Sensual Tease", text: "Blindfold & trace body with fingertips", type: 'timed', time: 240 },
+    { category: "Foreplay & Sensual Tease", text: "Slow teasing strokes/hand job or fingering", type: 'timed', time: 240 },
+    { category: "Foreplay & Sensual Tease", text: "Edge partner (close then stop) ×3", type: 'timed', time: 180 },
+    { category: "Foreplay & Sensual Tease", text: "Perform a seductive lap dance", type: 'timed', time: 90 },
+    { category: "Foreplay & Sensual Tease", text: "Whisper dirty talk non-stop for 2 min", type: 'timed', time: 120 },
+    { category: "Foreplay & Sensual Tease", text: "Kiss every inch of torso slowly", type: 'timed', time: 180 },
+    { category: "Foreplay & Sensual Tease", text: "Alternate hot breath & cold ice on nipples", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Sensual scalp & hair play massage", type: 'timed', time: 180 },
+    { category: "Foreplay & Sensual Tease", text: "Feather or soft fabric tease on inner thighs", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Slow shoulder & back massage turning erotic", type: 'timed', time: 240 },
+    { category: "Foreplay & Sensual Tease", text: "Kiss trail from toes to lips", type: 'timed', time: 300 },
+    { category: "Foreplay & Sensual Tease", text: "Blindfolded touch guessing game on body", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Use warm oil for slippery body glide", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Tease erogenous zones without genital touch for 10 min", type: 'timed', time: 600 },
+    { category: "Foreplay & Sensual Tease", text: "Sensual ear lobe nibble & warm breath", type: 'timed', time: 90 },
+    { category: "Foreplay & Sensual Tease", text: "Light nail drag down partner's back", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Whisper compliments while caressing skin", type: 'timed', time: 120 },
+    { category: "Foreplay & Sensual Tease", text: "Temperature play with warm hands then cool lips", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Slow sensual face & neck massage", type: 'timed', time: 180 },
+    { category: "Foreplay & Sensual Tease", text: "Tease with silk scarf over skin", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Kiss partner's wrists & inner arms", type: 'timed', time: 90 },
+    { category: "Foreplay & Sensual Tease", text: "Blindfold & feed mystery tastes on body", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Sensual lower back & hip rub", type: 'timed', time: 180 },
+    { category: "Foreplay & Sensual Tease", text: "Light scratching turning into caresses", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Eye gazing while tracing collarbone", type: 'timed', time: 120 },
+    { category: "Foreplay & Sensual Tease", text: "Use breath to tease lower belly", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Slow thigh & hip massage circling in", type: 'timed', time: 180 },
+    { category: "Foreplay & Sensual Tease", text: "Whisper fantasies mid-touch", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Feather tease on neck & chest", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Sensual back & butt scratch to caress", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Kiss & lick partner's palms", type: 'timed', time: 90 },
+    { category: "Foreplay & Sensual Tease", text: "Alternate ice & warm mouth on skin", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Verbal direction tease – tell what to touch", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Slow shoulder & upper back rub to lower", type: 'timed', time: 180 },
+    { category: "Foreplay & Sensual Tease", text: "Blindfold & guide partner's hand on you", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Use scented lotion full body glide", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Slow kiss trail down belly & hips", type: 'timed', time: 120 },
+    { category: "Foreplay & Sensual Tease", text: "Praise + light touch combo tease", type: 'normal' },
+    { category: "Foreplay & Sensual Tease", text: "Blindfold with silk & slow tease", type: 'normal' },
 
-            // === Naughty / playful dares (bulk of 200+) ===
-            { text: "Undress your partner using only your teeth", type: 'normal' },
-            { text: "Perform a sexy lap dance for 90 seconds", type: 'timed', time: 90 },
-            { text: "Put whipped cream on your partner's body and lick it off", type: 'normal' },
-            { text: "Send your partner a very explicit sext right now", type: 'normal' },
-            { text: "Strip completely naked and stay that way until next dare", type: 'normal' },
-            { text: "Give your partner a hickey somewhere visible", type: 'normal' },
-            { text: "Try a new sex toy on your partner (if available)", type: 'normal' },
-            { text: "Blindfold yourself and guess body parts by touch", type: 'normal' },
-            { text: "Do a sexy striptease to your favorite song", type: 'normal' },
-            { text: "Kiss your partner passionately for 2 full minutes", type: 'timed', time: 120 },
-            { text: "Let your partner spank you 10 times", type: 'normal' },
-            { text: "Masturbate in front of your partner for 2 minutes", type: 'timed', time: 120 },
-            { text: "Sit on your partner's face for 90 seconds", type: 'timed', time: 90 },
-            { text: "Try light bondage – tie hands with a scarf", type: 'normal' },
-            { text: "Feed each other chocolate-covered strawberries seductively", type: 'normal' },
-            { text: "Roleplay: pretend you're meeting for the first time", type: 'normal' },
-            { text: "Give a foot massage that turns erotic", type: 'timed', time: 180 },
-            { text: "Lick peanut butter off your partner's finger", type: 'normal' },
-            { text: "Take a sexy photo together (keep private!)", type: 'normal' },
-            { text: "Try anal play if both agree (fingering/toy)", type: 'normal' },
-            { text: "Moan your partner's name loudly during next touch", type: 'normal' },
-            { text: "Switch roles: one dominates fully for 5 minutes", type: 'timed', time: 300 },
-            { text: "Kiss with an ice cube between your mouths", type: 'normal' },
-            { text: "Give oral while your partner watches TV", type: 'normal' },
-            { text: "Try sex in a new room of the house", type: 'normal' },
-            { text: "Use body oil for a slippery massage", type: 'normal' },
-            { text: "Tell your partner your hottest fantasy in detail", type: 'normal' },
-            { text: "Remove clothing one piece at a time slowly", type: 'normal' },
-            { text: "Play with temperature: hot breath then cold ice", type: 'normal' },
-            { text: "Try mirror sex – watch yourselves", type: 'normal' },
-            // Continuing to reach 210 total – these are varied spicy dares adapted from popular adult lists
-            { text: "Let your partner choose where to cum", type: 'normal' },
-            { text: "Do 69 while lying on your sides", type: 'normal' },
-            { text: "Give a prostate massage (if applicable)", type: 'normal' },
-            { text: "Use a vibrator together", type: 'normal' },
-            { text: "Try light choking (consensual & safe)", type: 'normal' },
-            { text: "Record audio of your moans for later", type: 'normal' },
-            { text: "Wear something sexy your partner picks", type: 'normal' },
-            { text: "Tease each other for 10 minutes – no touching genitals", type: 'timed', time: 600 },
-            { text: "Have sex with music synced to rhythm", type: 'normal' },
-            { text: "Try shower sex if possible", type: 'normal' },
-            // ... (imagine 100+ more similar playful/kinky dares here to pad to 210; in real code you'd list them explicitly)
-            // For brevity in this response, assume expansion with duplicates/variations like:
-            { text: "Spank each other 5 times each", type: 'normal' },
-            { text: "Kiss partner's inner thighs for 2 minutes", type: 'timed', time: 120 },
-            { text: "Try a quickie somewhere risky in house", type: 'normal' },
-            { text: "Use food in foreplay (chocolate, fruit...)", type: 'normal' },
-            { text: "Give compliments while touching intimately", type: 'normal' },
-            // Add as many as needed to hit 210 – real implementation would have full unique list
-        ];
+    // Category 3: Oral & Intimate Acts (42 dares)
+    { category: "Oral & Intimate Acts", text: "Perform oral without stopping for 3 min", type: 'timed', time: 180 },
+    { category: "Oral & Intimate Acts", text: "Sit on partner's face for 90 seconds", type: 'timed', time: 90 },
+    { category: "Oral & Intimate Acts", text: "Mutual masturbation while watching each other", type: 'timed', time: 240 },
+    { category: "Oral & Intimate Acts", text: "Oral with flavored lube or edible", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Spell alphabet on genitals with tongue", type: 'timed', time: 60 },
+    { category: "Oral & Intimate Acts", text: "Humming/vibrating during oral for sensation", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "69 side-by-side variation", type: 'position', time: 300 },
+    { category: "Oral & Intimate Acts", text: "Oral from behind (receiver on knees)", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Slow licking circles around tip/clit", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Combine fingers + tongue for added pressure", type: 'timed', time: 180 },
+    { category: "Oral & Intimate Acts", text: "Tease with light suction then release", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Oral while partner stands", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Kivin method perpendicular approach", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Butterfly oral on back legs up", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Oral with hands gripping base", type: 'timed', time: 180 },
+    { category: "Oral & Intimate Acts", text: "Alternate speed during oral", type: 'timed', time: 180 },
+    { category: "Oral & Intimate Acts", text: "Oral with eye contact throughout", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Use tongue flick on sensitive underside", type: 'timed', time: 90 },
+    { category: "Oral & Intimate Acts", text: "Oral in 69 bridge variation", type: 'position', time: 300 },
+    { category: "Oral & Intimate Acts", text: "Tease balls/perineum during oral", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Slow deep throating with pause", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Oral with gentle twisting motion", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Combine oral with light hand stroking", type: 'timed', time: 180 },
+    { category: "Oral & Intimate Acts", text: "Oral from kneeling position", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Focus on clitoral hood circling", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Oral with flat tongue broad licks", type: 'timed', time: 90 },
+    { category: "Oral & Intimate Acts", text: "Tease entrance with tongue tip", type: 'timed', time: 90 },
+    { category: "Oral & Intimate Acts", text: "Oral while partner sits on edge", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Use suction variation pulses", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Oral with humming low tones", type: 'timed', time: 90 },
+    { category: "Oral & Intimate Acts", text: "Combine oral & finger curling inside", type: 'timed', time: 180 },
+    { category: "Oral & Intimate Acts", text: "Slow build from base to tip", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Oral in reverse position", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Focus on frenulum licking", type: 'timed', time: 90 },
+    { category: "Oral & Intimate Acts", text: "Oral with gentle ball cupping", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Tease with breath before contact", type: 'normal' },
+    { category: "Oral & Intimate Acts", text: "Oral with varied pressure", type: 'timed', time: 180 },
+    { category: "Oral & Intimate Acts", text: "Mutual oral in side position", type: 'position', time: 300 },
+    { category: "Oral & Intimate Acts", text: "Oral with slow swirling tongue", type: 'timed', time: 120 },
+    { category: "Oral & Intimate Acts", text: "Focus on perineum press during oral", type: 'timed', time: 90 },
+    { category: "Oral & Intimate Acts", text: "Oral with light teeth graze (gentle)", type: 'timed', time: 60 },
+    { category: "Oral & Intimate Acts", text: "Build to climax with increasing speed", type: 'timed', time: 240 },
 
-        // Shuffle once at start
+    // Category 4: Naughty & Kinky Play (42 dares)
+    { category: "Naughty & Kinky Play", text: "Light bondage – tie wrists with scarf", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Give/receive 10 consensual spanks", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay: boss & employee scenario", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light hair pulling during kissing", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold & follow verbal commands", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Dominant partner sets permission rules", type: 'timed', time: 300 },
+    { category: "Naughty & Kinky Play", text: "Use safe word + light restraint practice", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Praise kink – compliments during touch", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light nipple pinching or clamps (if available)", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay teacher/student lightly", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold & tease with commands", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light wrist hold during passion", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Use scarf as blindfold & restraint", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Dominant whispers rules for session", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light spanking with praise after", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay strangers meeting", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold & sensory object tease", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light biting on neck/shoulders", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Use tie for ankle restraint light", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay doctor/patient lightly", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Praise during light dominance", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold & guide to pleasure spots", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light scratching down back", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Verbal commands for positions", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay fantasy lightly acted", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Use soft cuffs if available", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light dominance – choose next act", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold taste test on body", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Praise kink during tease", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light hair tug during oral", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay power exchange brief", type: 'timed', time: 300 },
+    { category: "Naughty & Kinky Play", text: "Use silk tie for blindfold tease", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light spanking combo with massage", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold & whisper commands", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay seductive stranger", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light restraint with consent check", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Praise during light bondage", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold & body worship", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Light dominance role switch", type: 'timed', time: 300 },
+    { category: "Naughty & Kinky Play", text: "Use feather + light spank mix", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Roleplay forbidden scenario lightly", type: 'normal' },
+    { category: "Naughty & Kinky Play", text: "Blindfold & sensory command game", type: 'normal' },
+
+    // Category 5: Playful & Adventurous Challenges (42 dares)
+    { category: "Playful & Adventurous Challenges", text: "Undress partner using only mouth/teeth", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Whipped cream or chocolate lick off body", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Full sexy striptease to favorite song", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Sex in a new room or spot in house", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Feed each other fruit seductively", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Send explicit sext right now", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Stay naked until next dare", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Roleplay meeting as strangers", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Take private sexy photo together", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Try sex with music synced to rhythm", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Blindfold taste test treats off body", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Sexy scavenger hunt for toys/items", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Dirty truth or dare mini round", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Re-enact first kiss passionately", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Naked hide-and-seek in house", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Would you rather sexy edition game", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Try sex in shower if possible", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Send flirty emoji story sext", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Wear partner's underwear briefly", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Quickie somewhere risky in house", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Seductive dance battle", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Body shot off partner's body", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Roleplay movie scene sexy version", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Mirror sex watching yourselves", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Try sex with one clothed one naked", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Describe fantasy aloud during touch", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Sexy pillow fight leading to more", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Blind taste test food on body", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Try new pick-up line on partner", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Dance naked together", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Sex with slow motion movements", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Re-enact X-rated first date", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Use props from kitchen playfully", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Sexy emoji message challenge", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Try sex in complete darkness", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Body paint or marker art on partner", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Roleplay fantasy vacation", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Sex with one partner directing", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Try sex to favorite playlist", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Naked cooking challenge together", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Sexy compliment battle", type: 'normal' },
+    { category: "Playful & Adventurous Challenges", text: "Try sex in new lighting setup", type: 'normal' }
+];
+
+        // Shuffle the full list
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
@@ -152,52 +291,103 @@
         }
         shuffle(dares);
 
-        let currentInterval = null;
+        let timerInterval = null;
+        let timeLeft = 0;
+        let originalTime = 0;
+        let isRunning = false;
+
+        const timerDisplay = document.getElementById('timer-display');
+        const timerContainer = document.getElementById('timer-container');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateTimerButtons() {
+            startBtn.disabled = isRunning;
+            pauseBtn.disabled = !isRunning;
+            resetBtn.disabled = (timeLeft === originalTime && !isRunning);
+        }
+
+        function formatTime(sec) {
+            let m = Math.floor(sec / 60);
+            let s = sec % 60;
+            return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+
+        function startTimer() {
+            if (timeLeft <= 0 || isRunning) return;
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = formatTime(timeLeft);
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    timerDisplay.textContent = "Time's up! 🔥";
+                    updateTimerButtons();
+                }
+            }, 1000);
+            updateTimerButtons();
+        }
+
+        function pauseTimer() {
+            if (!isRunning) return;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            updateTimerButtons();
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            timeLeft = originalTime;
+            timerDisplay.textContent = formatTime(timeLeft);
+            updateTimerButtons();
+        }
+
+        function showTimer(seconds) {
+            originalTime = seconds;
+            timeLeft = seconds;
+            timerDisplay.textContent = formatTime(timeLeft);
+            timerContainer.style.display = 'block';
+            isRunning = false;
+            updateTimerButtons();
+        }
+
+        function hideTimer() {
+            timerContainer.style.display = 'none';
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            timeLeft = 0;
+            originalTime = 0;
+        }
 
         function drawDare() {
             if (dares.length === 0) {
-                document.getElementById('dareDisplay').innerHTML = "<p class='highlight'>No more dares left! Happy Valentine's Day – go enjoy each other! ❤️</p>";
-                document.getElementById('timer').innerHTML = "";
+                document.getElementById('dareDisplay').innerHTML = `<p class="dare-title">No more dares left!</p><p>Happy Valentine's Day – keep the passion going! ❤️</p>`;
+                hideTimer();
                 return;
             }
 
-            if (currentInterval) clearInterval(currentInterval);
+            hideTimer();
 
             const dare = dares.pop();
-            let html = `<p class="highlight">${dare.text}</p>`;
-            if (dare.desc) html += `<p><em>${dare.desc}</em></p>`;
+            let html = `<p class="dare-category">[Category: ${dare.category}]</p>`;
+            html += `<p class="dare-title">${dare.text}</p>`;
+            if (dare.desc) html += `<p class="dare-desc">${dare.desc}</p>`;
             if (dare.imageUrl) {
-                html += `<img class="position-img" src="${dare.imageUrl}" alt="Position demo" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<p class=\\'error\\'>Image unavailable – enjoy the description!</p>')">`;
+                html += `<img class="position-img" src="${dare.imageUrl}" alt="Illustration" onerror="this.outerHTML='<p class=\\'error\\'>Image unavailable – enjoy the dare!</p>'">`;
             }
 
             document.getElementById('dareDisplay').innerHTML = html;
 
-            if (dare.time) {
-                startTimer(dare.time);
-            } else {
-                document.getElementById('timer').innerHTML = "";
+            if (dare.time && dare.time > 0) {
+                showTimer(dare.time);
             }
-        }
-
-        function startTimer(sec) {
-            let remaining = sec;
-            const timerEl = document.getElementById('timer');
-            timerEl.innerHTML = `⏳ ${format(remaining)}`;
-
-            currentInterval = setInterval(() => {
-                remaining--;
-                timerEl.innerHTML = `⏳ ${format(remaining)}`;
-                if (remaining <= 0) {
-                    clearInterval(currentInterval);
-                    timerEl.innerHTML = "Time's up! 🔥 Next dare?";
-                }
-            }, 1000);
-        }
-
-        function format(s) {
-            let m = Math.floor(s / 60);
-            s = s % 60;
-            return `${m}:${s < 10 ? '0' : ''}${s}`;
         }
     </script>
 </body>
